@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+p{
+  font-size: 16px;
+}
+
+h1{
+  font-size: 60px;
+}
+
+h3{
+  font-size: 50px;
+}
+
+h4{
+  font-size: 32px;
+}
+
+h5{
+  font-size: 24px;
+}
