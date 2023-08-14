@@ -87,18 +87,22 @@ nav.transparent{
 
 button.teal-button{
   background-color: #035956;
+  border-radius: 5px;
   color: white;
   padding: 12px 16px;
-  font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 button.white-button{
   background-color: white;
+  border-radius: 5px;
   color: #035956;
   padding: 12px 16px;
-  font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+button.white-button:hover{
+  background-color: rgb(203, 203, 203);
 }
 
 #about .content .teal-header{
@@ -238,10 +242,89 @@ section{
     text-overflow: ellipsis;
 }
 
+.pop-up{
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items:center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.456);
+  backdrop-filter: blur(1px);
+}
+
+.pop-up section.form{
+
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  margin-bottom: 50px;
+  width: 1280px;
+  max-width: 90%;
+  max-height: 80%;
+  padding: 15px;
+  border-radius: 20px;
+  overflow: auto;
+  color: black;
+}
+
+.pop-up section.form .icon{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  margin-left: auto;
+  color:#035956;
+  font-size: 24px;
+}
+
+.pop-up section.form .icon:hover{
+  cursor: pointer;
+  color: #034947;
+}
+
+.pop-up section.form .form-content h4{
+  color: #035956;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.pop-up section.form .form-content label{
+  display: block;
+  margin-bottom: 10px;
+}
+.pop-up section.form .form-content label::after{
+  content: " *";
+  color: red;
+}
+
+.pop-up section.form .form-content input{
+  border-width: 1px;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 10px;
+  outline: none;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.pop-up section.form .form-content select{
+  margin-bottom: 12px;
+}
+
+.pop-up section.form .form-content button{
+  background-color: #035956;
+  padding: 10px 20px;
+  position: sticky;
+  color: white;
+  border-radius: 5px;
+  width: 100%;
+  bottom: 0;
+}
+
+.pop-up section.form .form-content button:hover{
+  background-color: #034947;
+}
+
 @media screen and (max-width: 768px) {
-  nav{
-    position: fixed;
-  }
 
   .nav-content {
     flex-direction: column;
@@ -287,6 +370,7 @@ section{
 
   #hero .content {
     height: fit-content;
+    padding: 10vh 0;
   }
 
   #hero .content h1{

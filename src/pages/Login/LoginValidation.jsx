@@ -1,4 +1,4 @@
-function validate (values) {
+export function validate (values) {
     let errors = {};
     if (!values.email) {
       errors.email = "Email yang Anda masukkan tidak terdaftar";
@@ -8,4 +8,3 @@ function validate (values) {
     }
     return errors;
   }
-  export default validate;

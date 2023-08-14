@@ -3,7 +3,6 @@ import Hero from "../../assets/hero.png"
 import PickUp from "../../assets/layanan-kami1.png"
 import DropOff from "../../assets/layanan-kami2.png"
 import product from "../../assets/product.png"
-import { Carousel } from "../../components/Carousel";
 
 export function Home() {
     return (

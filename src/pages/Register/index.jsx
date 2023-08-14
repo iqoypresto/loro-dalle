@@ -53,7 +53,7 @@ export function Register() {
 
   return (
     <>
-      <div className="max-w-screen-2xl mx-auto text-teal-800 pt-20 p-4">
+      <div className="max-w-screen-2xl mx-auto text-teal-800 py-20 p-4">
         <p className="flex justify-center text-xl font-semibold">
           Loro Dalle'
         </p>
@@ -161,7 +161,7 @@ export function Register() {
 export function RegisterSuccess(){
     return(
         <>  
-        <div className="max-w-screen-2xl mx-auto text-teal-800 pt-20 p-4">
+        <div className="max-w-screen-2xl mx-auto text-teal-800 py-20 p-4">
             <div className="flex justify-center text-xl pb-8 font-semibold">
                 Loro Dalle'
             </div>

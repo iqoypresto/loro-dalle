@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import validate from "./LoginValidation";
+import { validate } from "./LoginValidation";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { eye } from "react-icons-kit/feather/eye"
@@ -67,13 +67,12 @@ export function Login() {
                         <div className="mb-5">
                             <div className="flex items-center border rounded-xl overflow-hidden bg-teal-900">
                                 <BiUser className="ms-1" size={25} />
-                                <input className="block w-full bg-teal-900 p-2 focus:outline-none" type="text" name="email" placeholder="Email" onChange={handleChange} />
-
+                                <input className="block w-full bg-transparent p-2 focus:outline-none" type="text" name="email" placeholder="Email/Nomor Telepon" onChange={handleChange} />
                             </div>
                             <p className="text-red-600 text-sm">{formErrors.email}</p>
                             <div className="flex items-center mt-4 border rounded-xl overflow-hidden bg-teal-900">
                                 <BiLockAlt className="ms-1" size={25} />
-                                <input className="block w-full bg-teal-900 p-2 focus:outline-none" type={type} name="password" placeholder="Password" onChange={handleChange} />
+                                <input className="block w-full bg-transparent p-2 focus:outline-none" type={type} name="password" placeholder="Password" onChange={handleChange} />
                                 <Icon icon={icon} size={15} className="cursor-pointer me-2" onClick={handleToggle}></Icon>
                             </div>
                             <p className="text-red-600 text-sm">{formErrors.password}</p>
