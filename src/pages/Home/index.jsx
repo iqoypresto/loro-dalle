@@ -9,10 +9,10 @@ export function Home() {
         <>
             <Navbar />
             <section id="hero">
-            <img src={Hero} alt="garbage"/>
+                <img src={Hero} alt="garbage" />
                 <div className="content">
                     <span className="items">
-                        
+
                         <h1>Ayo! Tukarkan Sampah Anda <br /> Menjadi Bermanfaat</h1>
                         <p className="pt-4 pb-8 font-medium">Sampah ta, Rejeki ta</p>
                         <TealButton name="Info lebih lanjut" />
@@ -74,8 +74,11 @@ export function Home() {
                                 content="Deskripsi Produk bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
                             />
                         </div>
-
+                        <div className="md:col-span-3 mx-auto">
+                            <TealButton name="Lihat semua produk" />
+                        </div>
                     </div>
+
                 </div>
             </section>
             <section id="testimoni">

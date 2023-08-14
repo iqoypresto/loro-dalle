@@ -57,7 +57,7 @@ export function Register() {
         <p className="flex justify-center text-xl font-semibold">
           Loro Dalle'
         </p>
-        <div>
+        <div className="reg-header">
           <TealHeader title="Buat Akun" />
         </div>
         <div className="mx-auto text-center max-w-3xl">
@@ -72,7 +72,7 @@ export function Register() {
                 mt-2 px-2 text-black focus:outline-none focus:border-teal-700"
               type="text"
               name="fullname"
-              placeholder="Name Lengkap"
+              placeholder="eg: Budi Santoso"
               value={formValues.fullname}
               onChange={handleChange}
             ></input>
@@ -85,7 +85,7 @@ export function Register() {
                 mt-2 px-2 text-black"
               type="tel"
               name="telnumber"
-              placeholder="Nomor Telephone"
+              placeholder="eg: 081234567894"
               value={formValues.telnumber}
               onChange={handleChange}
             ></input>
@@ -98,7 +98,7 @@ export function Register() {
                 mt-2 px-2 text-black"
               type="text"
               name="email"
-              placeholder="Email"
+              placeholder="eg: email@gmail.com"
               value={formValues.email}
               onChange={handleChange}
             ></input>
@@ -113,7 +113,7 @@ export function Register() {
                 px-2 text-black rounded "
                     type={type}
                     name="password"
-                    placeholder="Password"
+                    placeholder="eg: password123"
                     onChange={handleChange}
                   ></input>
                   <span className="mx-2 px-1 flex items-center absolute right-0 aspect-square hover:dark:bg-gray-200 rounded-full text-black" onClick={handleToggle}>
@@ -129,7 +129,7 @@ export function Register() {
                 mt-2 px-2 text-black"
               type="password"
               name="confirmpassword"
-              placeholder="Password"
+              placeholder="eg: password123"
               value={formValues.confirmpassword}
               onChange={handleChange}
             ></input>
@@ -168,7 +168,7 @@ export function RegisterSuccess(){
             <div className="flex justify-center mb-8">
                 <img src={ValidationImg}></img>
             </div>
-            <div>
+            <div className="reg-header">
                 <TealHeader title="Selamat! Anda telah membuat akun"/>
             </div>
             <div className="mx-auto text-center max-w-3xl">

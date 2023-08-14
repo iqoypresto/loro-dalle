@@ -45,7 +45,7 @@ export function UserDashboard() {
             <section id="userstat">
                 <div className="content">
                     <TealHeader title="Analisa Penukaran Kamu" />
-                    <div className="grid md:grid-cols-4 md:gap-x-4 gap-14 xl:gap-x-14">
+                    <div className="grid md:grid-cols-4 gap-14 md:gap-x-4 xl:gap-x-12">
                         <div className="">
                             <UserDashboardCard number="400" title="Total Penukaran" explanation="Ayo tingkatkan penukaran!" />
                         </div>

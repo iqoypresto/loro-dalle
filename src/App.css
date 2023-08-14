@@ -93,6 +93,10 @@ button.teal-button{
   font-weight: 500;
 }
 
+button.teal-button:hover{
+  background-color: #03423f;
+}
+
 button.white-button{
   background-color: white;
   border-radius: 5px;
@@ -105,7 +109,7 @@ button.white-button:hover{
   background-color: rgb(203, 203, 203);
 }
 
-#about .content .teal-header{
+#about .content .teal-header, .reg-header .teal-header{
   margin-bottom: 32px;
 }
 
@@ -289,8 +293,8 @@ section{
 }
 
 .pop-up section.form .form-content label{
-  display: block;
-  margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
 }
 .pop-up section.form .form-content label::after{
   content: " *";
@@ -308,6 +312,12 @@ section{
 
 .pop-up section.form .form-content select{
   margin-bottom: 12px;
+  border-width: 1px;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 10px;
+  outline: none;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 
 .pop-up section.form .form-content button{
@@ -322,6 +332,33 @@ section{
 
 .pop-up section.form .form-content button:hover{
   background-color: #034947;
+}
+
+.user-input-wrp {
+	position: relative;
+	width: 100%;
+}
+.user-input-wrp .inputText{
+	width: 100%;
+	outline: none;
+	border:none;
+ 	box-shadow: none !important;
+}
+.user-input-wrp .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 11px;
+	left: 10px;
+	transition: 0.2s ease all;
+  color: rgb(167, 167, 167);
+}
+.user-input-wrp input:focus ~ .floating-label,
+.user-input-wrp input:not(:focus):valid ~ .floating-label{
+	top: 0px;
+	left: 10px;
+	font-size: 10px;
+	opacity: 1;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
