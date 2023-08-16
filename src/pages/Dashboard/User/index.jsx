@@ -4,7 +4,6 @@ import {
 import DropOff from "../../../assets/drop-off-dashboard.png"
 import PickUp from "../../../assets/pick-up-dashboard.png"
 import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
 
 export function UserDashboard() {
     const [isOpenPickUp, setIsOpenPickUp] = useState(false)
@@ -15,32 +14,15 @@ export function UserDashboard() {
     function handleClickDropOff() {
         setIsOpenDropOff(!isOpenDropOff);
     }
-    function handleClick(){
-        if(isOpenPickUp){
-            setIsOpenPickUp(false)
-        }
-        else if(isOpenDropOff){
-            setIsOpenDropOff(false)
-        }
-    }
+
     return (
         <>
             <DashboardNavbar />
             {isOpenPickUp &&
-                <div className="pop-up" data-aos="fade-in">
-                    <section className="form">
-                        <FaTimes className="icon" onClick={handleClick} />
-                        <FormPickUp />
-                    </section>
-                </div>
+                <FormPickUp />
             }
             {isOpenDropOff &&
-                <div className="pop-up" data-aos="fade-in">
-                    <section className="form">
-                        <FaTimes className="icon" onClick={handleClick} />
-                        <FormDropOff />
-                    </section>
-                </div>
+                <FormDropOff />
             }
             <section id="userstat">
                 <div className="content">

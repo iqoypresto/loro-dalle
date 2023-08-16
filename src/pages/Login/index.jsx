@@ -19,7 +19,7 @@ export function Login() {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmmit] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff)
 
@@ -31,7 +31,7 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
-    setIsSubmmit(true);
+    setIsSubmit(true);
   };
 
   const handleToggle = () => {
