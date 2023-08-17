@@ -9,11 +9,12 @@ import ValidationImg from "../../assets/reg-validation.svg";
 
 export function Register() {
   const initialValues = {
-    fullname: "",
-    telnumber: "",
+    fullName: "",
+    telNumber: "",
     email: "",
     password: "",
-    confirmpassword: "",
+    confirmPassword: "",
+    role: "user",
   };
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
@@ -31,6 +32,7 @@ export function Register() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    console.log(formValues)
   };
 
   useEffect(() => {
@@ -71,12 +73,12 @@ export function Register() {
               className="block border shadow rounded w-full h-9
                 mt-2 px-2 text-black focus:outline-none focus:border-teal-700"
               type="text"
-              name="fullname"
+              name="fullName"
               placeholder="eg: Budi Santoso"
-              value={formValues.fullname}
+              value={formValues.fullName}
               onChange={handleChange}
             ></input>
-            <p className="text-red-600 mb-2">{formErrors.fullname}</p>
+            <p className="text-red-600 mb-2">{formErrors.fullName}</p>
           </div>
           <div>
             <label className="text-black">Nomor Telepon / WhatsApp (WA)</label>
@@ -84,12 +86,12 @@ export function Register() {
               className="block border shadow rounded w-full h-9
                 mt-2 px-2 text-black"
               type="tel"
-              name="telnumber"
+              name="telNumber"
               placeholder="eg: 081234567894"
-              value={formValues.telnumber}
+              value={formValues.telNumber}
               onChange={handleChange}
             ></input>
-            <p className="text-red-600 mb-2">{formErrors.telnumber}</p>
+            <p className="text-red-600 mb-2">{formErrors.telNumber}</p>
           </div>
           <div>
             <label className="text-black">Email</label>
@@ -103,6 +105,14 @@ export function Register() {
               onChange={handleChange}
             ></input>
             <p className="text-red-600 mb-2">{formErrors.email}</p>
+          </div>
+          <div>
+            <label className="text-black" htmlFor="">Role</label>
+            <select className="block border shadow rounded w-full h-9
+                my-2 px-2 text-black" name="role" id="role" defaultValue="user" onChange={handleChange}>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
           <div>
                 <label className="text-black">Kata Sandi</label>
@@ -128,12 +138,12 @@ export function Register() {
               className="block border shadow rounded w-full h-9
                 mt-2 px-2 text-black"
               type="password"
-              name="confirmpassword"
+              name="confirmPassword"
               placeholder="eg: password123"
-              value={formValues.confirmpassword}
+              value={formValues.confirmPassword}
               onChange={handleChange}
             ></input>
-            <p className="text-red-600 mb-2">{formErrors.confirmpassword}</p>
+            <p className="text-red-600 mb-2">{formErrors.confirmPassword}</p>
           </div>
           <div className="flex items-center mt-4">
             <input className="me-2" type="checkbox" required></input>

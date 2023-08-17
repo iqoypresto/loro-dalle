@@ -15,6 +15,7 @@ export function Login() {
   const initialValues = {
     email: "",
     password: "",
+    role: "user"
   };
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
@@ -46,9 +47,9 @@ export function Login() {
   }
 
   useEffect(() => {
-    console.log(formErrors);
+    
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      navigate("/dashboard", { replace: true });
+      navigate("/dashboard")
     }
   }, [formErrors]);
 
@@ -69,7 +70,7 @@ export function Login() {
                 <BiUser className="ms-1" size={25} />
                 <div className="user-input-wrp">
                   <input className="inputText block w-full bg-transparent py-3 px-2 focus:outline-none" type="text" name="email" onChange={handleChange} required />
-                  <span class="floating-label">Email/Nomor Telepon</span>
+                  <span className="floating-label">Email/Nomor Telepon</span>
                 </div>
               </div>
               <p className="text-red-600 text-sm">{formErrors.email}</p>
@@ -77,11 +78,17 @@ export function Login() {
                 <BiLockAlt className="ms-1" size={25} />
                 <div className="user-input-wrp">
                   <input className="inputText block w-full bg-transparent py-3 px-2 focus:outline-none" type={type} name="password" onChange={handleChange} required/>
-                  <span class="floating-label">Password</span>
+                  <span className="floating-label">Password</span>
                 </div>
                 <Icon icon={icon} size={15} className="cursor-pointer me-2" onClick={handleToggle}></Icon>
               </div>
               <p className="text-red-600 text-sm">{formErrors.password}</p>
+              <div className="flex items-center mt-4 border rounded-xl overflow-hidden">
+                <select className="focus:outline-none w-full bg-transparent px-2 py-3" name="role" defaultValue="user" onChange={handleChange}>
+                  <option className="bg-teal-900" value="user">User</option>
+                  <option className="bg-teal-900" value="admin">Admin</option>
+                </select>
+              </div>
               <a href="#" className="text-right w-full block text-xs mt-2 hover:underline">Forgot password?</a>
             </div>
             <button type="submit" className="rounded-xl p-2 block w-full bg-green-500 text-black hover:dark:bg-green-600">Login</button>

@@ -8,7 +8,7 @@ export function FormPickUp() {
     const initialValues = {
         fullName: "",
         jenisSampah: "",
-        Berat: "",
+        berat: "",
         titikJemput: ""
     }
     const [formValues, setFormValues] = useState(initialValues);
@@ -52,15 +52,15 @@ export function FormPickUp() {
                                 <input type="text" id="name" name="fullName" placeholder="eg: Budi Santoso" onChange={handleChange} />
                                 <p className="text-red-600 mb-3 mt-1 text-sm">{formErrors.fullName}</p>
                                 <label htmlFor="jenisSampah">Jenis sampah</label>
-                                <select id="jenisSampah" name="jenisSampah" onChange={handleChange} defaultValue="  ">
+                                <select id="jenisSampah" name="jenisSampah" onChange={handleChange} defaultValue="">
                                     <option value="" disabled>Klik untuk memilih jenis sampah</option>
                                     <option value="organik">Organik</option>
                                     <option value="non-organik">Non-Organik</option>
                                 </select>
                                 <p className="text-red-600 mb-3 mt-1 text-sm">{formErrors.jenisSampah}</p>
-                                <label htmlFor="Berat">Berat sampah (Kg)</label>
-                                <input type="number" id="Berat" name="Berat" placeholder="eg: 2" onChange={handleChange} />
-                                <p className="text-red-600 mb-3 mt-1 text-sm">{formErrors.Berat}</p>
+                                <label htmlFor="berat">Berat sampah (Kg)</label>
+                                <input type="number" id="berat" name="berat" placeholder="eg: 2" onChange={handleChange} />
+                                <p className="text-red-600 mb-3 mt-1 text-sm">{formErrors.berat}</p>
                                 <label htmlFor="titikJemput">Titik jemput</label>
                                 <input type="text" id="titikJemput" name="titikJemput" placeholder="eg: Jl. Sampulungan No. 1" onChange={handleChange} />
                                 <p className="text-red-600 mb-3 mt-1 text-sm">{formErrors.titikJemput}</p>
