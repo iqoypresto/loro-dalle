@@ -49,6 +49,7 @@ export function Login() {
   useEffect(() => {
     
     if (Object.keys(formErrors).length === 0 && isSubmit) {
+      
       navigate("/dashboard")
     }
   }, [formErrors]);

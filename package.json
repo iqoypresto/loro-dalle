@@ -13,6 +13,7 @@
     "@fontsource-variable/inter": "^5.0.8",
     "@fontsource/inter": "^5.0.8",
     "aos": "^3.0.0-beta.6",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.2.0",

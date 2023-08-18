@@ -6,6 +6,9 @@ import Icon from "react-icons-kit";
 import { eye } from "react-icons-kit/feather/eye"
 import { eyeOff } from "react-icons-kit/feather/eyeOff"
 import ValidationImg from "../../assets/reg-validation.svg";
+import axios from "axios";
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export function Register() {
   const initialValues = {
@@ -38,7 +41,18 @@ export function Register() {
   useEffect(() => {
     console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      navigate("/register-success", {replace: true});
+      axios.post(`${BASE_URL}/signup`, {
+        fullname: formValues.fullName,
+        phone_number: formValues.telNumber,
+        email: formValues.email,
+        password: formValues.password,
+      }).then((response) => {
+        console.log({response});
+        navigate("/register-success", {replace: true});
+      }).catch((error) => {
+        // HANDLE REGISTER ERROR
+        console.log(error);
+      });
     }
   }, [formErrors]);
 
