@@ -10,6 +10,10 @@ import { BiUser, BiLockAlt } from "react-icons/bi";
 import bgTopLeft from "../../assets/ellipse-1.svg";
 import bgBotLeft from "../../assets/ellipse-2.svg";
 import bgBotRight from "../../assets/ellipse-3.svg";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export function Login() {
   const initialValues = {
@@ -47,10 +51,17 @@ export function Login() {
   }
 
   useEffect(() => {
-    
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      
-      navigate("/dashboard")
+      axios.post(`${BASE_URL}/login`, {
+        email: formValues.email,
+        password: formValues.password,
+      }).then((response) => {
+        Cookies.set('auth', response.data.data.accessToken, { expires: 1 });
+        navigate("/dashboard");
+      }).catch((error) => {
+        // HANDLE LOGIN ERROR
+        console.log({error});
+      })
     }
   }, [formErrors]);
 
