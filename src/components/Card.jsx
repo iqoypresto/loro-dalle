@@ -16,7 +16,7 @@ export function HomeCard({ src, product}) {
                     <p className="text-justify">{product.description}</p>
                 </div>
                 <div className="px-6 py-4">
-                    <a href="#{product.uuid}" className="text-teal-800 underline hover:text-teal-950">
+                    <a href={"#" + product.uuid} className="text-teal-800 underline hover:text-teal-950">
                         Dapatkan {product.title}
                     </a>
                 </div>
