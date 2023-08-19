@@ -3,8 +3,37 @@ import Hero from "../../assets/hero.png"
 import PickUp from "../../assets/layanan-kami1.png"
 import DropOff from "../../assets/layanan-kami2.png"
 import product from "../../assets/product.png"
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+
 
 export function Home() {
+    const [products, setProducts] = useState([]);
+    const [testimonies, setTestimonies] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/products?limit=3`)
+        .then((response) => {
+            setProducts(response.data.data.products)
+            console.log(response)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        })
+    }, [])
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/testimonies`)
+        .then((response) => {
+            setTestimonies(response.data.data.testimonies);
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        });
+    }, []);
+
     return (
         <>
             <Navbar />
@@ -53,7 +82,14 @@ export function Home() {
                 <div className="content">
                     <TealHeader title="Produk" />
                     <div className="grid md:grid-cols-3  gap-11 flex-wrap">
-                        <div className="md:col-start-1">
+                        {products.length > 0 && products.map((prod) => (
+                            <HomeCard
+                                key={prod.uuid}
+                                src={product}
+                                product={prod}
+                            />
+                        ))}
+                        {/* <div className="md:col-start-1">
                             <HomeCard
                                 src={product}
                                 title="Nama Produk"
@@ -73,7 +109,7 @@ export function Home() {
                                 title="Nama Produk"
                                 content="Deskripsi Produk bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
                             />
-                        </div>
+                        </div> */}
                         <div className="md:col-span-3 mx-auto">
                             <TealButton name="Lihat semua produk" />
                         </div>
@@ -85,7 +121,7 @@ export function Home() {
                 <div className="content">
                     <WhiteHeader title="Apa Kata Mereka?" />
                     <div className="flex">
-                        <HomeTestimoniCard />
+                        {testimonies.length > 0 && <HomeTestimoniCard testimony={testimonies[0]} />}
                     </div>
                 </div>
             </section>

@@ -2,22 +2,22 @@ import { useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { BsArrowUpRight, BsArrowDownRight } from "react-icons/bs"
 
-export function HomeCard(Cards) {
+export function HomeCard({ src, product}) {
     return (
         <>
             <div className="rounded overflow-hidden shadow-lg">
                 <img
                     className="w-full"
-                    src={Cards.src}
+                    src={src}
                     alt="Sunset in the mountains"
                 ></img>
                 <div className="px-6 py-4">
-                    <div className="font-bold text-2xl mb-2">{Cards.title}</div>
-                    <p className="text-justify">{Cards.content}</p>
+                    <div className="font-bold text-2xl mb-2">{product.title}</div>
+                    <p className="text-justify">{product.description}</p>
                 </div>
                 <div className="px-6 py-4">
-                    <a href="#" className="text-teal-800 underline hover:text-teal-950">
-                        Dapatkan {Cards.title}
+                    <a href="#{product.uuid}" className="text-teal-800 underline hover:text-teal-950">
+                        Dapatkan {product.title}
                     </a>
                 </div>
             </div>
@@ -25,15 +25,7 @@ export function HomeCard(Cards) {
     )
 }
 
-export function HomeTestimoniCard() {
-
-    const data =
-    {
-        content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        name: "Nama Orang",
-        jabatan: "Pekerjaan/jabatan",
-    }
-
+export function HomeTestimoniCard({testimony}) {
     function handleClick() {
     }
     return (
@@ -42,9 +34,9 @@ export function HomeTestimoniCard() {
                 <FaAngleLeft size={70} className="cursor-pointer" onClick={handleClick} />
             </div>
             <div className="col-start-2 col-span-6">
-                <h4 className="content">{data.content}</h4>
-                <h4 className="nama">{data.name}</h4>
-                <h5>{data.jabatan}</h5>
+                <h4 className="content">{testimony.content}</h4>
+                <h4 className="nama">{testimony.fullname}</h4>
+                <h5>{testimony.position}</h5>
             </div>
             <div className="col-end-9 items-center flex justify-center">
                 <FaAngleRight size={70} className="cursor-pointer" onClick={handleClick} />
