@@ -3,8 +3,10 @@ import { FaBars, FaTimes, FaUsers, FaCoins } from "react-icons/fa"
 import { IoNotificationsOutline } from "react-icons/io5"
 import { CgProfile } from "react-icons/cg"
 import { useState } from "react";
-import {LiaHomeSolid} from "react-icons/lia"
-import {GiSwapBag} from "react-icons/gi"
+import { LiaHomeSolid } from "react-icons/lia"
+import { GiSwapBag } from "react-icons/gi"
+import { MdKeyboardArrowDown } from "react-icons/md"
+import Profile from "../assets/profile.png"
 
 export function Navbar() {
 
@@ -96,8 +98,8 @@ export function DashboardNavbar() {
                                 </Link>
                             </li>
                             <li className="relative">
-                                <a className="hover:cursor-pointer">
-                                    <CgProfile size={48} onClick={handleProfileClick} />
+                                <a className="hover:cursor-pointer" onClick={handleProfileClick}>
+                                    <img src={Profile} alt="" width={45} height={45} />
                                 </a>
                                 <div className={`profile-setting ${isProfile ? "drop-shadow-2xl z-10" : "hidden"}`}>
                                     <p className="mb-3">Anto Bukanmain</p>
@@ -133,13 +135,31 @@ export const AdminNavbar = () => {
                             <NavLink to="/admin-user-section"> <FaUsers size={18} className="me-9" />Users</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/"> <GiSwapBag size={18} className="me-9" />Sampah</NavLink>
+                            <NavLink to="/admin-sampah-section"> <GiSwapBag size={18} className="me-9" />Penukaran</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/"> <FaCoins size={18} className="me-9" />Point</NavLink>
+                            <NavLink to="/admin-point-section"> <FaCoins size={18} className="me-9" />Point</NavLink>
                         </li>
                     </div>
                 </ul>
+            </div>
+        </>
+    )
+}
+
+export const AdminTopNavbar = () => {
+    return (
+        <>
+            <div className="mb-10 flex items-center justify-between">
+                <div className="flex items-center">
+                    <FaBars size={18} />
+                    <input type="text" className="ms-3 border rounded-md bg-gray-200 h-9 w-72 px-5" placeholder="Search..." />
+                </div>
+                <button className="flex items-center">
+                    <img src={Profile} alt="" width={35} height={35} />
+                    <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
+                    <MdKeyboardArrowDown />
+                </button>
             </div>
         </>
     )

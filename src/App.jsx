@@ -1,5 +1,5 @@
 import './App.css'
-import { Home, Login, Register, RegisterSuccess, UserDashboard, AdminDashboard, UserSection } from './pages'
+import { Home, Login, Register, RegisterSuccess, UserDashboard, AdminDashboard, UserSection, SampahSection, PointSection } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import AOS from "aos";
@@ -18,8 +18,8 @@ function App() {
         <Route path='/dashboard' element={<UserDashboard />} />
         <Route path='/admin-dashboard' element={<AdminDashboard />} />
         <Route path='/admin-user-section' element={<UserSection />} />
-        <Route path='/admin-sampah-section' element={<UserSection />} />
-        <Route path='/admin-point-section' element={<UserSection />} />
+        <Route path='/admin-sampah-section' element={<SampahSection />} />
+        <Route path='/admin-point-section' element={<PointSection />} />
       </Routes>
     </BrowserRouter>
   )

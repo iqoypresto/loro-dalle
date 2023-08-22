@@ -1,13 +1,61 @@
-import { AdminNavbar } from "../../../components"
+import { AdminNavbar, AdminTopNavbar } from "../../../components"
 
 export const AdminDashboard = () => {
-    return(
+    return (
         <div className="flex">
             <span>
-            <AdminNavbar />
+                <AdminNavbar />
             </span>
-            <div className="admin-content w-full px-10">
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi totam voluptates quam culpa nisi placeat, explicabo quasi vitae sequi. Quisquam illum possimus quo dicta. Reiciendis deserunt suscipit, dignissimos aliquid inventore quos fugiat at quam sapiente dolore laboriosam voluptate recusandae neque, architecto id ullam consectetur beatae, temporibus reprehenderit modi voluptatibus esse. Sunt magnam deleniti, est explicabo quis ducimus provident aliquam minima exercitationem iure? Earum aspernatur, error voluptatibus ex necessitatibus deserunt totam facere delectus fugit dolorem voluptatum voluptate iste omnis quis voluptates iure officia enim! Dolor quia obcaecati voluptates molestiae quas optio illum assumenda pariatur tempora. Sit explicabo possimus quaerat omnis inventore hic suscipit voluptatibus atque, pariatur, expedita sint similique nihil repellat fuga quisquam, commodi culpa ducimus? Mollitia ad reiciendis deleniti iusto nisi vitae alias voluptatibus molestias nostrum, aliquam itaque molestiae perspiciatis saepe, beatae harum consequatur qui ipsum maiores veritatis culpa impedit aliquid sint. Nisi impedit non voluptas eum possimus doloribus reprehenderit dolor, odio perferendis, quibusdam doloremque numquam sit excepturi inventore eligendi officia asperiores commodi et! In ex dolorem molestias accusantium. Repudiandae labore at consectetur ratione quasi reiciendis sint, eaque blanditiis distinctio excepturi illo voluptas optio quidem suscipit neque sunt error quibusdam dolorum explicabo! Iste esse fugit eius, corporis quasi sequi laborum asperiores nisi dolor dolores deleniti vel accusantium iure dicta perferendis quidem eos beatae id commodi assumenda. Voluptate, reprehenderit illo sunt quidem velit porro, laboriosam deserunt explicabo quia fugiat dolorum assumenda eum saepe animi tenetur a ipsum quibusdam libero culpa quisquam expedita! Reiciendis temporibus exercitationem incidunt provident aspernatur pariatur commodi sunt vero minima debitis doloribus nam, consequuntur eligendi! Quos eveniet doloribus assumenda iste repudiandae voluptatibus fuga officia, fugit quidem error explicabo, dolorem in! Possimus necessitatibus cupiditate illum itaque eos atque neque cum veniam odit? Qui voluptates vel illo mollitia autem. Saepe minus quisquam libero eaque distinctio, nisi fugit perferendis, facere mollitia quis sit repellendus rerum veritatis dolor consequatur aliquam. Obcaecati placeat eaque rerum doloribus magni, qui quia quibusdam minima amet repellendus. Nisi quae assumenda doloremque, voluptatibus et perferendis quam facere hic! Tenetur perspiciatis quo exercitationem, eligendi hic ipsa veniam dolorum provident est rerum minus porro consequuntur deserunt ex, repudiandae nulla esse unde. Tempora nihil quaerat delectus doloribus mollitia dolor ipsa, quia quidem laboriosam nemo et consectetur voluptate totam expedita veniam, impedit illo saepe! Voluptatem animi quia perspiciatis, dolore eaque exercitationem cum ab quis blanditiis nobis odio at dolorem rerum ea excepturi commodi, a sapiente enim fugit corporis ipsam! Blanditiis ullam ipsa praesentium accusantium natus laudantium et? Soluta autem, culpa error, iste magni atque beatae eligendi aut modi cum est incidunt nobis officia aspernatur, ab voluptates quia. Corrupti iusto omnis repudiandae, facere repellendus rem praesentium minus, quidem veniam hic reprehenderit dolores unde eius fugit quasi quos? Facere, nesciunt vel rem incidunt eligendi impedit est quam, aliquam at quasi aliquid maxime quis dolores ducimus accusantium quo fuga accusamus ipsam, nulla consequatur ipsa. Debitis explicabo illo harum eveniet, placeat corrupti necessitatibus earum sapiente ipsam, praesentium rem quasi nobis ipsa reprehenderit pariatur, similique ut quisquam nisi dolorum reiciendis itaque non? Quas iusto expedita tenetur ullam assumenda iste alias, commodi ab veritatis aperiam odit repellat molestiae autem facere, dolore pariatur aliquam omnis molestias, ut possimus incidunt nihil asperiores eaque? Tempore velit laudantium nisi iusto, illum ea nihil harum deserunt adipisci amet? Quasi cumque, consequuntur alias perspiciatis architecto molestias ab adipisci voluptate, earum totam voluptatibus. Sit eveniet fuga rem voluptates, sapiente doloremque dolores quos assumenda minus asperiores corrupti? Fugit debitis aliquam non harum odio consectetur similique, a deserunt ipsum quis quasi ullam beatae nostrum impedit officia. Soluta beatae, velit quod cum ut exercitationem atque sit molestias, adipisci minus facere officiis iusto doloribus cupiditate voluptatum itaque nemo excepturi praesentium suscipit qui nam ipsam quos illo dolor. Vitae ipsam consequuntur dolores, atque iusto esse ab, vel totam laboriosam iure distinctio cumque, enim odio ad non nemo fugiat nobis magnam tenetur alias? Consequatur tempore vitae dolor voluptate magnam, labore esse quaerat, dicta incidunt hic quos suscipit! Nobis, excepturi aliquid molestias neque necessitatibus sed, doloribus vitae tenetur est, magni tempore sint velit laudantium dicta ipsam dignissimos dolorem? Magnam rerum consectetur totam consequuntur fugit ex, delectus asperiores a deleniti ut rem accusantium quas, doloremque quod reprehenderit incidunt amet provident repellendus? Nihil ea nemo, velit ipsam provident cupiditate voluptates est ut rem dignissimos, quibusdam, id repellat consequuntur praesentium doloremque tenetur nostrum deleniti temporibus numquam doloribus quos. Sit, laborum perspiciatis suscipit distinctio optio ratione eligendi aliquam. Ab totam laborum tempora ad eum cum nostrum sed temporibus esse quisquam quia veniam aspernatur ullam, debitis omnis iusto odit quo dolorum itaque quaerat. Velit nisi ab nesciunt quae ad magnam harum temporibus sint dolore eaque possimus, iste nemo, aut esse similique sunt placeat eos a necessitatibus cum sed! Iusto temporibus quos debitis quisquam culpa ab explicabo delectus maiores vero facere, esse nobis, excepturi corporis et commodi tempora corrupti! Ut inventore rerum nihil sint labore! Autem hic excepturi ducimus eligendi neque ab voluptate suscipit quo corrupti? Magnam totam temporibus amet animi blanditiis architecto eius non eum dolorem cum, sapiente quae itaque officia ad vel quo assumenda et, necessitatibus at ea quod omnis delectus iure veniam. Nesciunt facere recusandae aperiam labore magni! Architecto recusandae unde similique voluptates vitae eius distinctio aspernatur cum odit, eos, cupiditate facilis atque autem reprehenderit quos, saepe placeat? Quae culpa maxime distinctio consequuntur atque aspernatur, ex alias eveniet consequatur dignissimos ea tenetur ipsam tempore blanditiis minus, corrupti a eaque vitae maiores optio ad sequi quas? Ex dolore nobis omnis voluptate tempore illum aliquam harum ipsam praesentium! Sit in distinctio vel et animi earum ad consequuntur? Excepturi aut consequatur corrupti asperiores dignissimos, vel earum ipsum, deleniti iusto est, dolores qui impedit necessitatibus. Aut nihil maiores nostrum beatae eveniet voluptatem amet alias cupiditate autem repudiandae eum sed mollitia enim, nam dolorem, laudantium unde. Voluptatibus pariatur quia sit nihil dolore deserunt, laudantium consectetur sapiente, natus porro rerum tempore nisi repellat ab iusto nostrum iste! Ducimus nesciunt minima voluptates earum. Nostrum deserunt dolorem recusandae cum cumque corporis placeat similique quasi? Perspiciatis vel quibusdam omnis provident obcaecati quasi praesentium quae corrupti doloremque necessitatibus delectus culpa facilis cum, blanditiis earum fugit.
+            <div className="admin-content">
+                <AdminTopNavbar />
+                <h4 className="text-teal-800 font-bold">DASHBOARD</h4>
+                <p className="text-teal-800 mb-5">Selamat datang di dashboard!</p>
+                <div className="grid grid-cols-6 gap-5">
+                    <div className="border rounded-xl col-start-1 p-5 items-center flex admin-card">
+                        <div className="w-full">
+                            <p className="mb-3">Total Users</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
+                            <div className="flex justify-between">
+                                <p>+5%</p>
+                                <p>Sejak bulan lalu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="border rounded-xl col-start-2 p-5 items-center flex admin-card">
+                        <div className="w-full">
+                            <p className="mb-3">Total Penukaran Sampah</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">1250</h5>
+                            <div className="flex justify-between">
+                                <p>+10%</p>
+                                <p>Sejak bulan lalu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="border rounded-xl row-span-2 col-start-3 col-end-7 p-5 items-center flex admin-card">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam illo dolorum debitis officia vel repudiandae perferendis enim aspernatur? Obcaecati nostrum esse rerum unde distinctio? Porro neque voluptatem sunt quis qui similique accusamus architecto rerum. Delectus ex quibusdam ducimus fugiat iure accusamus quaerat, deserunt nesciunt harum, aut sit! Pariatur dolores ea, adipisci ullam quaerat nulla quam totam rerum voluptatibus aliquam amet, labore eaque, deserunt excepturi vero. Labore numquam ipsa similique dolorem voluptatum perspiciatis commodi saepe possimus ex eligendi sit provident quos, ad quo at in maxime quas, optio placeat molestiae error voluptate autem. Suscipit illo culpa pariatur enim nobis? Laudantium, molestias.
+                    </div>
+                    <div className="border rounded-xl col-start-1 p-5 items-center flex admin-card">
+                        <div className="w-full">
+                            <p className="mb-3">Total Users</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
+                            <div className="flex justify-between">
+                                <p>+5%</p>
+                                <p>Sejak bulan lalu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="border rounded-xl col-start-2 p-5 items-center flex admin-card">
+                        <div className="w-full">
+                            <p className="mb-3">Total Users</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
+                            <div className="flex justify-between">
+                                <p>+5%</p>
+                                <p>Sejak bulan lalu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, eligendi dicta libero cum ab minus obcaecati hic, perspiciatis beatae nemo unde. Esse delectus enim molestiae ipsam, dolore minus, provident id maxime, harum repellat culpa eligendi. Labore blanditiis quas quae tempore esse provident quaerat necessitatibus quisquam, reiciendis doloremque nesciunt maiores laudantium aperiam, minus officia repudiandae. Tenetur adipisci incidunt ab at, delectus quod quos fuga! Sequi molestiae similique molestias incidunt quis in cupiditate ullam dolore dolores, quibusdam illum commodi eaque optio, blanditiis magni ipsum reprehenderit modi minima! Eum laboriosam blanditiis hic culpa optio molestias omnis, quia id, consequatur itaque fuga sequi maxime?
             </div>
         </div>
     )
