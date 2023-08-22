@@ -37,6 +37,7 @@ export function Login() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    console.log(formValues)
   };
 
   const handleToggle = () => {
@@ -51,7 +52,7 @@ export function Login() {
   }
 
   useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "user") {
       axios.post(`${BASE_URL}/login`, {
         email: formValues.email,
         password: formValues.password,
@@ -62,6 +63,9 @@ export function Login() {
         // HANDLE LOGIN ERROR
         console.log({error});
       })
+    }
+    else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
+      navigate("/admin-dashboard")
     }
   }, [formErrors]);
 
