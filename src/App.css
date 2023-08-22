@@ -85,6 +85,87 @@ nav.transparent{
   border: none;
 }
 
+.nav-content ul li .profile-setting{
+  position: absolute;
+  background-color:#035956;
+  top: 58px;
+  right: 0;
+  width: 300px;
+  padding: 10px 0;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  color: white;
+}
+.nav-content ul li .profile-setting p{
+  padding: 5px 10px;
+}
+
+.nav-content ul li .profile-setting .menu{
+  border-top: 1px solid rgba(255, 255, 255, 0.534);
+}
+
+.nav-content ul li .profile-setting .menu a{
+  padding: 10px;
+  margin: 0;
+}
+
+.nav-content ul li .profile-setting .menu a:hover{
+  background-color: #03423f;
+  color: white;
+  border-radius: 0;
+}
+
+.admin-navbar{
+  max-height: 100%;
+  height: 100vh;
+  max-width: 50vw;
+  width: 250px;
+  background-color: rgb(240, 240, 240);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+}
+
+.admin-navbar .logo{
+  display: block;
+  padding: 0 50px ;
+  font-weight: bold;
+  font-size: 20px;
+  color: #08857f;
+}
+
+.admin-navbar ul {
+  margin: 10px 0;
+}
+
+.admin-navbar ul .point{
+  padding-top: 20px;
+}
+
+.admin-navbar ul .point .header{
+  color: #08857f;
+  padding: 10px 50px;
+}
+
+.admin-navbar ul li a{
+  display: flex;
+  padding: 10px 10px 10px 50px ;
+  align-items: center;
+}
+
+.admin-navbar ul li a:hover{
+  background-color: #08857f;
+  color: white;
+}
+
+.admin-navbar ul li a.active{
+  background-color: #08857f;
+  color: white;
+}
+.admin-navbar ul li a.active::after{
+  content: "›";
+  margin-left: auto;
+}
+
 button.teal-button{
   background-color: #035956;
   border-radius: 5px;
@@ -108,6 +189,8 @@ button.white-button{
 button.white-button:hover{
   background-color: rgb(203, 203, 203);
 }
+
+
 
 #about .content .teal-header, .reg-header .teal-header{
   margin-bottom: 32px;
