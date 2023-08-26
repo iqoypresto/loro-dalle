@@ -1,11 +1,9 @@
 import { Link, NavLink } from "react-router-dom"
-import { FaBars, FaTimes, FaUsers, FaCoins } from "react-icons/fa"
+import { FaBars, FaTimes, FaUsers, FaCoins, FaSearch, FaShoppingBasket } from "react-icons/fa"
 import { IoNotificationsOutline } from "react-icons/io5"
-import { CgProfile } from "react-icons/cg"
 import { useState } from "react";
 import { LiaHomeSolid } from "react-icons/lia"
 import { GiSwapBag } from "react-icons/gi"
-import { MdKeyboardArrowDown } from "react-icons/md"
 import Profile from "../assets/profile.png"
 
 export function Navbar() {
@@ -98,12 +96,15 @@ export function DashboardNavbar() {
                                 </Link>
                             </li>
                             <li className="relative">
-                                <a className="hover:cursor-pointer" onClick={handleProfileClick}>
+                                <a className="hover:cursor-pointer " onClick={handleProfileClick}>
                                     <img src={Profile} alt="" width={45} height={45} />
                                 </a>
                                 <div className={`profile-setting ${isProfile ? "drop-shadow-2xl z-10" : "hidden"}`}>
-                                    <p className="mb-3">Anto Bukanmain</p>
-                                    <p className="font-light text-xs">anto@gmail.com</p>
+                                    <div className="flex flex-col items-center">
+                                        <img src={Profile} alt="" width={60} height={60} />
+                                        <h5>Anto Bukanmain</h5>
+                                        <p className="font-light text-xs">anto@gmail.com</p>
+                                    </div>
                                     <div className="menu mt-3 gap-y-2 flex flex-col">
                                         <Link className="py-1">Profile Setting</Link>
                                         <Link to="/" className="py-1">Log Out</Link>
@@ -120,7 +121,6 @@ export function DashboardNavbar() {
 
 export const AdminNavbar = () => {
     return (
-        <>
             <div className="admin-navbar">
                 <Link to="/admin-dashboard" className="logo">LORO' DALLE</Link>
                 <ul>
@@ -130,7 +130,10 @@ export const AdminNavbar = () => {
                         </li>
                     </div>
                     <div className="point">
-                        <p className="header">User Section</p>
+                        <p className="header">User Facing</p>
+                        <li>
+                            <NavLink to="/admin-product-section"> <FaShoppingBasket size={18} className="me-9" />Product</NavLink>
+                        </li>
                         <li>
                             <NavLink to="/admin-user-section"> <FaUsers size={18} className="me-9" />Users</NavLink>
                         </li>
@@ -143,24 +146,5 @@ export const AdminNavbar = () => {
                     </div>
                 </ul>
             </div>
-        </>
-    )
-}
-
-export const AdminTopNavbar = () => {
-    return (
-        <>
-            <div className="mb-10 flex items-center justify-between">
-                <div className="flex items-center">
-                    <FaBars size={18} />
-                    <input type="text" className="ms-3 border rounded-md bg-gray-200 h-9 w-72 px-5" placeholder="Search..." />
-                </div>
-                <button className="flex items-center">
-                    <img src={Profile} alt="" width={35} height={35} />
-                    <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
-                    <MdKeyboardArrowDown />
-                </button>
-            </div>
-        </>
     )
 }

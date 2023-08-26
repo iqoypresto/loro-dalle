@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react"
 import { validate } from "../pages/User/Dashboard/FormValidation";
-import { useNavigate } from "react-router-dom";
-
 import { FaTimes } from "react-icons/fa";
-
 export function FormPickUp() {
     const initialValues = {
         fullName: "",

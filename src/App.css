@@ -88,7 +88,6 @@ nav.transparent{
 .nav-content ul li .profile-setting{
   position: absolute;
   background-color:#035956;
-  top: 58px;
   right: 0;
   width: 300px;
   padding: 10px 0;
@@ -115,20 +114,21 @@ nav.transparent{
 }
 
 .admin-navbar{
-  max-height: 100%;
   height: 100vh;
-  max-width: 60vw;
+  max-height: 100%;
+  max-width: 70vw;
   width: 250px;
   background-color: rgb(240, 240, 240);
   padding: 20px 0;
   position: sticky;
   top: 0;
+  left: 0;
   overflow: auto;
+  z-index: 10;
 }
 
 .admin-navbar .logo{
-  display: block;
-  padding: 0 50px ;
+  padding-left: 50px;
   font-weight: bold;
   font-size: 20px;
   color: #08857f;
@@ -445,7 +445,7 @@ section{
 
 .admin-content{
   width: 100%;
-  padding: 20px 40px;
+  padding: 5px 40px 20px 40px;
 }
 
 .admin-content table thead{
@@ -503,6 +503,13 @@ section{
   .nav-content ul li a:hover{
     border: none;
     background-color: #023f3d;
+  }
+
+  .admin-navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
   }
 
   #hero .content {
