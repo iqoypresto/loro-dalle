@@ -6,16 +6,43 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
+import { useEffect } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export const UserSection = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSideNavbar, setIsSideNavbar] = useState(true)
+    const [confirmatedUser, setConfirmatedUser] = useState([]);
+    const [unconfirmatedUser, setUnconfirmatedUser] = useState([]);
+
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
     }
+
+    useEffect(() => {
+        const accessToken = Cookies.get('auth');
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/users`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            setConfirmatedUser(response.data.data.confirmated_users)
+            setUnconfirmatedUser(response.data.data.unconfirmated_users)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },)
+    }, []);
+
     return (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
@@ -55,22 +82,26 @@ export const UserSection = () => {
                                     <th className="text-start p-3">Nama</th>
                                     <th className="text-start p-3">Email</th>
                                     <th className="text-start p-3">No. Telepon</th>
+                                    <th className="text-start p-3">Alamat</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><FaCheck className="me-3" size={20} color="green" /></NavLink>
-                                            <NavLink><FaTimes size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {unconfirmatedUser.length > 0 && unconfirmatedUser.map((user) => (
+                                    <tr key={user.id}>
+                                        <td className="p-3">{user.id}</td>
+                                        <td className="p-3">{user.fullname}</td>
+                                        <td className="p-3">{user.email}</td>
+                                        <td className="p-3">{user.phone_number}</td>
+                                        <td className="p-3">{user.address}</td>
+                                        <td className="p-3">
+                                            <div className="flex">
+                                                <NavLink><FaCheck className="me-3" size={20} color="green" /></NavLink>
+                                                <NavLink><FaTimes size={20} color="red" /></NavLink>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
@@ -86,70 +117,26 @@ export const UserSection = () => {
                                     <th className="text-start p-3">Nama</th>
                                     <th className="text-start p-3">Email</th>
                                     <th className="text-start p-3">No. Telepon</th>
+                                    <th className="text-start p-3">Alamat</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
+                                {confirmatedUser.length > 0 && confirmatedUser.map((user) => (
+                                    <tr key={user.id}>
+                                        <td className="p-3">{user.id}</td>
+                                        <td className="p-3">{user.fullname}</td>
+                                        <td className="p-3">{user.email}</td>
+                                        <td className="p-3">{user.phone_number}</td>
+                                        <td className="p-3">{user.address}</td>
+                                        <td className="p-3">
+                                            <div className="flex">
+                                                <NavLink><BiEdit className="me-3" size={20} /></NavLink>
+                                                <NavLink><BiTrash size={20} color="red" /></NavLink>
+                                            </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

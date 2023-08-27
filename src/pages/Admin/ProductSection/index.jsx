@@ -76,7 +76,7 @@ export const ProductSection = () => {
                             </thead>
                             <tbody>
                                 {products.length > 0 && products.map((prod) => (
-                                    <tr key={prod.id}>
+                                    <tr key={prod.uuid}>
                                         <td className="p-3">{prod.uuid}</td>
                                         <td className="p-3">{prod.title}</td>
                                         <td className="p-3">{prod.description}</td>
