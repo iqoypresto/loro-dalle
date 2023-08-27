@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react"
 import { validate } from "../pages/User/Dashboard/FormValidation";
 import { FaTimes } from "react-icons/fa";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+
 export function FormPickUp() {
     const initialValues = {
         fullName: "",
@@ -32,6 +37,23 @@ export function FormPickUp() {
     useEffect(() => {
         console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
+            const accessToken = Cookies.get('auth');
+            axios({
+                method: 'POST',
+                url: `${BASE_URL}/trash-transactions/pick-up`,
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                data: {
+                    fullname: formValues.fullName,
+                    type: formValues.jenisSampah,
+                    weight: formValues.berat,
+                    location: formValues.titikJemput,
+                }
+            }).then((response) => console.log(response.data)).catch((error) => {
+                // HANDLE ERROR HERE
+                console.log(error);
+            });
             setIsOpen(!isOpen)
         }
     }, [formErrors])
@@ -52,7 +74,7 @@ export function FormPickUp() {
                                 <select id="jenisSampah" name="jenisSampah" onChange={handleChange} defaultValue="">
                                     <option value="" disabled>Klik untuk memilih jenis sampah</option>
                                     <option value="organik">Organik</option>
-                                    <option value="non-organik">Non-Organik</option>
+                                    <option value="anorganik">Non-Organik</option>
                                 </select>
                                 <p className="text-red-600 mb-3 mt-1 text-sm">{formErrors.jenisSampah}</p>
                                 <label htmlFor="berat">Berat sampah (Kg)</label>
