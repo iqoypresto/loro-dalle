@@ -445,7 +445,9 @@ section{
 
 .admin-content{
   width: 100%;
-  padding: 5px 40px 20px 40px;
+  max-width: 100vw;
+  padding: 5px 20px 20px 20px;
+  overflow: hidden;
 }
 
 .admin-content table thead{

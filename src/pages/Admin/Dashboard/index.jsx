@@ -1,8 +1,7 @@
 import { AdminNavbar } from "../../../components"
-import { BiEdit, BiTrash } from "react-icons/bi"
-import { FaCheck, FaTimes, FaBars, FaSearch } from "react-icons/fa"
+import { FaBars, FaSearch } from "react-icons/fa"
 import { IoIosArrowBack } from "react-icons/io"
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
@@ -15,7 +14,6 @@ export const AdminDashboard = () => {
     }
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
-        console.log(isSideNavbar)
     }
     return (
         <div className="flex">
@@ -92,7 +90,6 @@ export const AdminDashboard = () => {
                         </div>
                     </div>
                 </div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, eligendi dicta libero cum ab minus obcaecati hic, perspiciatis beatae nemo unde. Esse delectus enim molestiae ipsam, dolore minus, provident id maxime, harum repellat culpa eligendi. Labore blanditiis quas quae tempore esse provident quaerat necessitatibus quisquam, reiciendis doloremque nesciunt maiores laudantium aperiam, minus officia repudiandae. Tenetur adipisci incidunt ab at, delectus quod quos fuga! Sequi molestiae similique molestias incidunt quis in cupiditate ullam dolore dolores, quibusdam illum commodi eaque optio, blanditiis magni ipsum reprehenderit modi minima! Eum laboriosam blanditiis hic culpa optio molestias omnis, quia id, consequatur itaque fuga sequi maxime?
             </div>
         </div>
     )
