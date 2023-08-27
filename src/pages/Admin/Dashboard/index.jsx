@@ -45,7 +45,7 @@ export const AdminDashboard = () => {
                 </div>
                 <h4 className="text-teal-800 font-bold">DASHBOARD</h4>
                 <p className="text-teal-800 mb-5">Selamat datang di dashboard!</p>
-                <div className="grid grid-cols-6 gap-5">
+                <div className="grid md:grid-cols-4 gap-5">
                     <div className="border rounded-xl col-start-1 p-5 items-center flex admin-card">
                         <div className="w-full">
                             <p className="mb-3">Total Users</p>
@@ -56,7 +56,7 @@ export const AdminDashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="border rounded-xl col-start-2 p-5 items-center flex admin-card">
+                    <div className="border rounded-xl col-start-1 md:col-start-2 p-5 items-center flex admin-card">
                         <div className="w-full">
                             <p className="mb-3">Total Penukaran Sampah</p>
                             <h5 className="mb-3 text-teal-700 font-semibold">1250</h5>
@@ -66,10 +66,7 @@ export const AdminDashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="border rounded-xl row-span-2 col-start-3 col-end-7 p-5 items-center flex admin-card">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam illo dolorum debitis officia vel repudiandae perferendis enim aspernatur? Obcaecati nostrum esse rerum unde distinctio? Porro neque voluptatem sunt quis qui similique accusamus architecto rerum. Delectus ex quibusdam ducimus fugiat iure accusamus quaerat, deserunt nesciunt harum, aut sit! Pariatur dolores ea, adipisci ullam quaerat nulla quam totam rerum voluptatibus aliquam amet, labore eaque, deserunt excepturi vero. Labore numquam ipsa similique dolorem voluptatum perspiciatis commodi saepe possimus ex eligendi sit provident quos, ad quo at in maxime quas, optio placeat molestiae error voluptate autem. Suscipit illo culpa pariatur enim nobis? Laudantium, molestias.
-                    </div>
-                    <div className="border rounded-xl col-start-1 p-5 items-center flex admin-card">
+                    <div className="border rounded-xl col-start-1 md:col-start-3 p-5 items-center flex admin-card">
                         <div className="w-full">
                             <p className="mb-3">Total Users</p>
                             <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
@@ -79,7 +76,7 @@ export const AdminDashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="border rounded-xl col-start-2 p-5 items-center flex admin-card">
+                    <div className="border rounded-xl col-start-1 md:col-start-4 p-5 items-center flex admin-card">
                         <div className="w-full">
                             <p className="mb-3">Total Users</p>
                             <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
