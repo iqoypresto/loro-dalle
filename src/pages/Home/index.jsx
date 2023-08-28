@@ -84,32 +84,11 @@ export function Home() {
                     <div className="grid md:grid-cols-3  gap-11 flex-wrap">
                         {products.length > 0 && products.map((prod) => (
                             <HomeCard
-                                key={prod.uuid}
+                                key={prod.id}
                                 src={product}
                                 product={prod}
                             />
                         ))}
-                        {/* <div className="md:col-start-1">
-                            <HomeCard
-                                src={product}
-                                title="Nama Produk"
-                                content="Deskripsi Produk bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
-                            />
-                        </div>
-                        <div className="md:col-start-2">
-                            <HomeCard
-                                src={product}
-                                title="Nama Produk"
-                                content="Deskripsi Produk bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
-                            />
-                        </div>
-                        <div className="md:col-start-3">
-                            <HomeCard
-                                src={product}
-                                title="Nama Produk"
-                                content="Deskripsi Produk bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
-                            />
-                        </div> */}
                         <div className="md:col-span-3 mx-auto">
                             <TealButton name="Lihat semua produk" />
                         </div>
