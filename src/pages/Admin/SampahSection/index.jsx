@@ -1,21 +1,49 @@
 import { AdminNavbar } from "../../../components"
-import { FaBars, FaSearch } from "react-icons/fa"
+import { FaBars, FaCheck, FaSearch, FaTimes } from "react-icons/fa"
 import { BiEdit, BiTrash } from "react-icons/bi"
 import { IoIosArrowBack } from "react-icons/io"
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
+import { useEffect } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export const SampahSection = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSideNavbar, setIsSideNavbar] = useState(true)
+    const [finishedExchanges, setFinishedExchanges] = useState([])
+    const [unfinishedExchanges, setUnfinishedExchanges] = useState([])
+
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
     }
+
+    useEffect(() => {
+        const accessToken = Cookies.get('auth');
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/trash-transactions`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            setFinishedExchanges(response.data.data.finishedTransactions)
+            setUnfinishedExchanges(response.data.data.unfinishedTransactions)
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },)
+    }, []);
+
     return (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
@@ -44,83 +72,84 @@ export const SampahSection = () => {
                         <NavLink className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
                     </div>
                 </div>
-                <h4 className="text-teal-800 font-bold">PENUKARAN SAMPAH</h4>
-                <p className="text-teal-800 mb-10">Entire list of Penukaran Sampah</p>
-                <div className="overflow-x-scroll">
+                <div className="border-b-2 border-b-teal-700 pb-10 mb-8 w-full">
+                    <h4 className="text-teal-800 font-bold">PENUKARAN BELUM TERSELESAIKAN</h4>
+                    <p className="text-teal-800 mb-10">List of Unfinished Exchange</p>
+                    <div className="overflow-x-scroll">
                         <table className="table-auto border w-full">
                             <thead>
                                 <tr>
                                     <th className="text-start p-3">ID</th>
+                                    <th className="text-start p-3">Jenis Penukaran</th>
                                     <th className="text-start p-3">Nama</th>
-                                    <th className="text-start p-3">Email</th>
-                                    <th className="text-start p-3">No. Telepon</th>
+                                    <th className="text-start p-3">Jenis Sampah</th>
+                                    <th className="text-start p-3">Berat (Kg)</th>
+                                    <th className="text-start p-3">Lokasi</th>
+                                    <th className="text-start p-3">Dibuat Oleh</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {unfinishedExchanges.length > 0 && unfinishedExchanges.map((exchange) => (
+                                    <tr key={exchange.id}>
+                                        <td className="p-3">{exchange.id}</td>
+                                        <td className="p-3">{exchange.transaction_type}</td>  
+                                        <td className="p-3">{exchange.fullname}</td>
+                                        <td className="p-3">{exchange.trash_type}</td>
+                                        <td className="p-3">{exchange.weight}</td>
+                                        <td className="p-3">{exchange.location}</td>
+                                        <td className="p-3">{exchange.owner}</td>
+                                        <td className="p-3">
+                                            <div className="flex">
+                                                <NavLink><FaCheck className="me-3" size={20} color="green" /></NavLink>
+                                                <NavLink><FaTimes size={20} color="red" /></NavLink>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div>
+                    <h4 className="text-teal-800 font-bold">PENUKARAN SAMPAH</h4>
+                    <p className="text-teal-800 mb-10">List of Penukaran Sampah</p>
+                    <div className="overflow-x-scroll">
+                        <table className="table-auto border w-full">
+                            <thead>
+                                <tr>
+                                    <th className="text-start p-3">ID</th>
+                                    <th className="text-start p-3">Jenis Penukaran</th>
+                                    <th className="text-start p-3">Nama</th>
+                                    <th className="text-start p-3">Jenis Sampah</th>
+                                    <th className="text-start p-3">Berat (Kg)</th>
+                                    <th className="text-start p-3">Lokasi</th>
+                                    <th className="text-start p-3">Dibuat Oleh</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {finishedExchanges.length > 0 && finishedExchanges.map((exchange) => (
+                                    <tr key={exchange.id}>
+                                        <td className="p-3">{exchange.id}</td>
+                                        <td className="p-3">{exchange.transaction_type}</td>  
+                                        <td className="p-3">{exchange.fullname}</td>
+                                        <td className="p-3">{exchange.trash_type}</td>
+                                        <td className="p-3">{exchange.weight}</td>
+                                        <td className="p-3">{exchange.location}</td>
+                                        <td className="p-3">{exchange.owner}</td>
+                                        <td className="p-3">
+                                            <div className="flex">
+                                                <NavLink><BiEdit className="me-3" size={20} /></NavLink>
+                                                <NavLink><BiTrash size={20} color="red" /></NavLink>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     )
