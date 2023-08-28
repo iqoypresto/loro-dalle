@@ -12,6 +12,9 @@ export function validate (values) {
     if (!values.password) {
       errors.password = "Harap isi kolom ini!";
     }
+    if (!values.address) {
+      errors.address = "Harap isi kolom ini!";
+    }
     if (!(values.confirmPassword === values.password)) {
       errors.confirmPassword = "Password tidak sama!";
     }

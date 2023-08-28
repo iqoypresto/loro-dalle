@@ -67,7 +67,7 @@ export const ProductSection = () => {
                                     <th className="text-start p-3">ID</th>
                                     <th className="text-start p-3">Nama</th>
                                     <th className="text-start p-3">Deskripsi</th>
-                                    <th className="text-start p-3">Harga</th>
+                                    <th className="text-start p-3">Harga (Rp)</th>
                                     <th className="text-start p-3">Stok</th>
                                     <th className="text-start p-3">Jenis</th>
                                     <th className="text-start p-3">Pemilik</th>
@@ -76,8 +76,8 @@ export const ProductSection = () => {
                             </thead>
                             <tbody>
                                 {products.length > 0 && products.map((prod) => (
-                                    <tr key={prod.uuid}>
-                                        <td className="p-3">{prod.uuid}</td>
+                                    <tr key={prod.id}>
+                                        <td className="p-3">{prod.id}</td>
                                         <td className="p-3">{prod.title}</td>
                                         <td className="p-3">{prod.description}</td>
                                         <td className="p-3">{prod.price}</td>

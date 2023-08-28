@@ -15,6 +15,7 @@ export function Register() {
     fullName: "",
     telNumber: "",
     email: "",
+    address: "",
     password: "",
     confirmPassword: "",
     role: "user",
@@ -45,6 +46,7 @@ export function Register() {
         fullname: formValues.fullName,
         phone_number: formValues.telNumber,
         email: formValues.email,
+        address: formValues.address,
         password: formValues.password,
       }).then((response) => {
         console.log({response});
@@ -119,6 +121,19 @@ export function Register() {
               onChange={handleChange}
             ></input>
             <p className="text-red-600 mb-2">{formErrors.email}</p>
+          </div>
+          <div>
+            <label className="text-black">Alamat</label>
+            <input
+              className="block border shadow rounded w-full h-9
+                mt-2 px-2 text-black"
+              type="text"
+              name="address"
+              placeholder="eg: Jl. Lo'mo Ahmad No.1234, Dusun Sampulungan Lompo"
+              value={formValues.address}
+              onChange={handleChange}
+            ></input>
+            <p className="text-red-600 mb-2">{formErrors.address}</p>
           </div>
           <div>
             <label className="text-black" htmlFor="">Role</label>
