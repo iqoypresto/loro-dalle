@@ -5,8 +5,14 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
+import { useEffect } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
+
+const BASE_URL = 'http://localhost:5000';
 
 export const AdminDashboard = () => {
+    const [data, setData] = useState({})
     const [isOpen, setIsOpen] = useState(false)
     const [isSideNavbar, setIsSideNavbar] = useState(true)
     const handleClick = () => {
@@ -15,6 +21,25 @@ export const AdminDashboard = () => {
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
     }
+
+    useEffect(() => {
+        const accessToken = Cookies.get('auth');
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/admins/dashboard-data`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            setData(response.data.data)
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },)
+    }, [])
+
     return (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
@@ -46,42 +71,38 @@ export const AdminDashboard = () => {
                 <h4 className="text-teal-800 font-bold">DASHBOARD</h4>
                 <p className="text-teal-800 mb-5">Selamat datang di dashboard!</p>
                 <div className="grid md:grid-cols-4 gap-5">
-                    <div className="border rounded-xl col-start-1 p-5 items-center flex admin-card">
+                    <div className="border rounded-xl col-start-1 p-5 items-top flex admin-card">
                         <div className="w-full">
-                            <p className="mb-3">Total Users</p>
-                            <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
-                            <div className="flex justify-between">
-                                <p>+5%</p>
-                                <p>Sejak bulan lalu</p>
-                            </div>
+                            <p className="mb-3">Total Penukaran Sampah</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">{data.total_transactions | 0}</h5>
                         </div>
                     </div>
                     <div className="border rounded-xl col-start-1 md:col-start-2 p-5 items-center flex admin-card">
                         <div className="w-full">
-                            <p className="mb-3">Total Penukaran Sampah</p>
-                            <h5 className="mb-3 text-teal-700 font-semibold">1250</h5>
+                            <p className="mb-3">Penukaran Bulan Ini</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">{data.current_month_transactions | 0}</h5>
                             <div className="flex justify-between">
-                                <p>+10%</p>
+                                <p>{data.monthly_rate >= 0 ? '+' : ''}{data.monthly_rate | 0}%</p>
                                 <p>Sejak bulan lalu</p>
                             </div>
                         </div>
                     </div>
                     <div className="border rounded-xl col-start-1 md:col-start-3 p-5 items-center flex admin-card">
                         <div className="w-full">
-                            <p className="mb-3">Total Users</p>
-                            <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
+                            <p className="mb-3">Penukaran Minggu Ini</p>
+                            <h5 className="mb-3 text-teal-700 font-semibold">{data.current_week_transactions | 0}</h5>
                             <div className="flex justify-between">
-                                <p>+5%</p>
-                                <p>Sejak bulan lalu</p>
+                                <p>{data.weekly_rate >= 0 ? '+' : ''}{data.weekly_rate | 0}%</p>
+                                <p>Sejak minggu lalu</p>
                             </div>
                         </div>
                     </div>
                     <div className="border rounded-xl col-start-1 md:col-start-4 p-5 items-center flex admin-card">
                         <div className="w-full">
                             <p className="mb-3">Total Users</p>
-                            <h5 className="mb-3 text-teal-700 font-semibold">525</h5>
+                            <h5 className="mb-3 text-teal-700 font-semibold">{data.total_users | 0}</h5>
                             <div className="flex justify-between">
-                                <p>+5%</p>
+                                <p>+{data.current_month_users | 0}</p>
                                 <p>Sejak bulan lalu</p>
                             </div>
                         </div>
