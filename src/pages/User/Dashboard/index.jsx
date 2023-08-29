@@ -4,16 +4,40 @@ import {
 import DropOff from "../../../assets/drop-off-dashboard.png"
 import PickUp from "../../../assets/pick-up-dashboard.png"
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export function UserDashboard() {
+    const [data, setData] = useState({})
     const [isOpenPickUp, setIsOpenPickUp] = useState(false)
     const [isOpenDropOff, setIsOpenDropOff] = useState(false)
+
     function handleClickPickUp() {
         setIsOpenPickUp(!isOpenPickUp);
     }
     function handleClickDropOff() {
         setIsOpenDropOff(!isOpenDropOff);
     }
+
+    useEffect(() => {
+        const accessToken = Cookies.get('auth');
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/users/user-dashboard-data`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            setData(response.data.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },)
+    }, [])
 
     return (
         <>
@@ -29,16 +53,24 @@ export function UserDashboard() {
                     <TealHeader title="Analisa Penukaran Kamu" />
                     <div className="grid md:grid-cols-4 gap-14 md:gap-x-4 xl:gap-x-12">
                         <div className="">
-                            <UserDashboardCard number="400" title="Total Penukaran" explanation="Ayo tingkatkan penukaran!" />
+                            <UserDashboardCard number={data.total_transactions | 0} title="Total Penukaran" explanation="Ayo tingkatkan penukaran!" />
                         </div>
                         <div className="">
-                            <UserDashboardCardUp number="80" title="Penukaran dalam bulan ini" explanation="30% Menurun dari minggu lalu" />
+                            {
+                                data.monthly_rate >= 0 ? 
+                                    <UserDashboardCardDown number={data.current_month_transactions | 0} title="Penukaran dalam bulan ini" explanation={Math.abs(data.monthly_rate) + "% meningkat dari bulan lalu"} />
+                                    : <UserDashboardCardUp number={data.current_month_transactions | 0} title="Penukaran dalam bulan ini" explanation={Math.abs(data.monthly_rate) + "% menurun dari bulan lalu"} />
+                            }
                         </div>
                         <div className="">
-                            <UserDashboardCardDown number="20" title="Penukaran dalam seminggu" explanation="10% Meningkat dari minggu lalu" />
+                            {
+                                data.weekly_rate >= 0 ? 
+                                    <UserDashboardCardDown number={data.current_week_transactions | 0} title="Penukaran dalam seminggu" explanation={Math.abs(data.weekly_rate) + "% meningkat dari minggu lalu"} />
+                                    : <UserDashboardCardUp number={data.current_week_transactions | 0} title="Penukaran dalam seminggu" explanation={Math.abs(data.weekly_rate) + "% menurun dari minggu lalu"} />
+                            }
                         </div>
                         <div className="">
-                            <UserDashboardCard number="190" title="Total Poin" explanation="Ayo tingkatkan penukaran!" />
+                            <UserDashboardCard number={data.total_points | 0} title="Total Poin" explanation="Ayo tingkatkan penukaran!" />
                         </div>
                     </div>
                 </div>
