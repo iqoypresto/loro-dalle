@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import Cookies from "js-cookie"
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export const AdminDashboard = () => {
     const [data, setData] = useState({})
