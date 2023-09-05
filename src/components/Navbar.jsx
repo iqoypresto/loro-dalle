@@ -28,7 +28,7 @@ export function Navbar() {
         <>
             <nav className={isTransparent ? "transparent" : ""}>
                 <div className="nav-content">
-                    <h1>Loro Dalle'</h1>
+                    <h4>Loro Dalle'</h4>
                     <span>
                         {isOpen ? <FaTimes className="icon" size={30} onClick={handleClick} /> : <FaBars className="icon" size={30} onClick={handleClick} />}
 
@@ -77,7 +77,7 @@ export function DashboardNavbar() {
 
             <nav className={isTransparent ? "transparent" : ""}>
                 <div className="nav-content">
-                    <h1>Loro Dalle'</h1>
+                    <h4>Loro Dalle'</h4>
                     <span>
                         {isOpen ? <FaTimes className="icon" size={30} onClick={handleClick} /> : <FaBars className="icon" size={30} onClick={handleClick} />}
 

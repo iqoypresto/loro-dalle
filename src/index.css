@@ -21,17 +21,25 @@ p{
 }
 
 h1{
-  font-size: 60px;
+  font-size: 34px;
+}
+
+h2{
+  font-size: 30px;
 }
 
 h3{
-  font-size: 50px;
+  font-size: 24px;
 }
 
 h4{
-  font-size: 32px;
+  font-size: 20px;
 }
 
 h5{
-  font-size: 24px;
+  font-size: 18px;
+}
+
+p{
+  font-size: 16px;
 }

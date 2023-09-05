@@ -31,7 +31,7 @@ export function HomeTestimoniCard({testimony}) {
     return (
         <div className="testimoni-card text-center grid grid-cols-8">
             <div className="col-start-1 items-center flex justify-center">
-                <FaAngleLeft size={70} className="cursor-pointer" onClick={handleClick} />
+                <FaAngleLeft size={35} className="cursor-pointer" onClick={handleClick} />
             </div>
             <div className="col-start-2 col-span-6">
                 <h4 className="content">{testimony.content}</h4>
@@ -39,7 +39,7 @@ export function HomeTestimoniCard({testimony}) {
                 <h5>{testimony.position}</h5>
             </div>
             <div className="col-end-9 items-center flex justify-center">
-                <FaAngleRight size={70} className="cursor-pointer" onClick={handleClick} />
+                <FaAngleRight size={35} className="cursor-pointer" onClick={handleClick} />
             </div>
         </div>
     )

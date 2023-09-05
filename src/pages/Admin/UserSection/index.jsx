@@ -21,6 +21,7 @@ export const UserSection = () => {
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
+    
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
     }
