@@ -14,6 +14,7 @@ export function UserDashboard() {
     const [data, setData] = useState({})
     const [isOpenPickUp, setIsOpenPickUp] = useState(false)
     const [isOpenDropOff, setIsOpenDropOff] = useState(false)
+    const [profile, setProfile] = useState({})
 
     function handleClickPickUp() {
         setIsOpenPickUp(!isOpenPickUp);
@@ -41,7 +42,7 @@ export function UserDashboard() {
 
     return (
         <>
-            <DashboardNavbar />
+            <DashboardNavbar name="Anto Bukan Maen" email="Anto@gmail.com"/>
             {isOpenPickUp &&
                 <FormPickUp />
             }
