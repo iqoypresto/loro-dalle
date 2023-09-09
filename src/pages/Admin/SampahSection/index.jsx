@@ -1,6 +1,6 @@
 import { AdminNavbar } from "../../../components"
 import { FaBars, FaCheck, FaSearch, FaTimes } from "react-icons/fa"
-import { BiEdit, BiTrash } from "react-icons/bi"
+import { BiEdit } from "react-icons/bi"
 import { IoIosArrowBack } from "react-icons/io"
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
@@ -17,12 +17,57 @@ export const SampahSection = () => {
     const [isSideNavbar, setIsSideNavbar] = useState(true)
     const [finishedExchanges, setFinishedExchanges] = useState([])
     const [unfinishedExchanges, setUnfinishedExchanges] = useState([])
+    const [reloadData, setReloadData] = useState(false)
 
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
+    }
+
+    function handleLogOut() {
+        Cookies.remove('auth')
+    }
+
+    function handleAcceptExchange(id) {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'PUT',
+            url: `${BASE_URL}/trash-transactions/${id}/confirm`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        }).finally(() => {
+            setReloadData(true)
+        });
+    }
+
+    function handleDeclineExchange(id) {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'DELETE',
+            url: `${BASE_URL}/trash-transactions/${id}`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },).finally(() => {
+            setReloadData(true)
+        });
     }
 
     useEffect(() => {
@@ -41,8 +86,10 @@ export const SampahSection = () => {
         }).catch((error) => {
             // HANDLE ERROR
             console.log(error);
-        },)
-    }, []);
+        }).finally(() => {
+            setReloadData(false)
+        })
+    }, [reloadData]);
 
     return (
         <div className="flex">
@@ -69,7 +116,7 @@ export const SampahSection = () => {
                             <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
-                        <NavLink className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
+                        <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
                     </div>
                 </div>
                 <div className="border-b-2 border-b-teal-700 pb-10 mb-8 w-full">
@@ -101,8 +148,8 @@ export const SampahSection = () => {
                                         <td className="p-3">{exchange.owner}</td>
                                         <td className="p-3">
                                             <div className="flex">
-                                                <NavLink><FaCheck className="me-3" size={20} color="green" /></NavLink>
-                                                <NavLink><FaTimes size={20} color="red" /></NavLink>
+                                                <NavLink onClick={() => handleAcceptExchange(exchange.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
+                                                <NavLink onClick={() => handleDeclineExchange(exchange.id)}><FaTimes size={20} color="red" /></NavLink>
                                             </div>
                                         </td>
                                     </tr>
@@ -141,7 +188,6 @@ export const SampahSection = () => {
                                         <td className="p-3">
                                             <div className="flex">
                                                 <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                                <NavLink><BiTrash size={20} color="red" /></NavLink>
                                             </div>
                                         </td>
                                     </tr>

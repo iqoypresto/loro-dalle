@@ -37,7 +37,7 @@ export function Register() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    console.log(formValues)
+    // console.log(formValues)
   };
 
   useEffect(() => {
@@ -55,6 +55,7 @@ export function Register() {
       }).catch((error) => {
         // HANDLE REGISTER ERROR
         console.log(error);
+        alert(error)
       });
     }
   }, [formErrors]);

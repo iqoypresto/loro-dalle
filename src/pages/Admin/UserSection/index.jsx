@@ -17,6 +17,7 @@ export const UserSection = () => {
     const [isSideNavbar, setIsSideNavbar] = useState(true)
     const [confirmatedUser, setConfirmatedUser] = useState([]);
     const [unconfirmatedUser, setUnconfirmatedUser] = useState([]);
+    const [reloadUser, setReloadUser] = useState(false);
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -26,12 +27,57 @@ export const UserSection = () => {
         setIsSideNavbar(!isSideNavbar)
     }
 
+<<<<<<< HEAD
     const handleAccept = (id) => {
         console.log(id)
     }
 
     const handleReject = () => {
 
+=======
+    function handleLogOut() {
+        Cookies.remove('auth')
+    }
+
+    function handleAcceptUser(id) {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'PUT',
+            url: `${BASE_URL}/users/${id}/confirm`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        }).finally(() => {
+            setReloadUser(true)
+        });
+    }
+
+    function handleDeclineUser(id) {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'DELETE',
+            url: `${BASE_URL}/users/${id}`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },).finally(() => {
+            setReloadUser(true)
+        });
+>>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
     }
 
     useEffect(() => {
@@ -48,9 +94,17 @@ export const UserSection = () => {
             setUnconfirmatedUser(response.data.data.unconfirmated_users)
         }).catch((error) => {
             // HANDLE ERROR
+<<<<<<< HEAD
             console.log(error.response.data.message);
         },)
     }, []);
+=======
+            console.log(error);
+        }).finally(() => {
+            setReloadUser(false);
+        });
+    }, [reloadUser]);
+>>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
 
     return (
         <div className="flex">
@@ -77,7 +131,7 @@ export const UserSection = () => {
                             <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
-                        <NavLink className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
+                        <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
                     </div>
                 </div>
                 <div className="border-b-2 border-b-teal-700 pb-10 mb-8 w-full">
@@ -105,8 +159,13 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
+<<<<<<< HEAD
                                                 <NavLink onClick={()=> handleAccept(user.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
                                                 <NavLink onClick={handleReject}><FaTimes size={20} color="red" /></NavLink>
+=======
+                                                <NavLink onClick={() => handleAcceptUser(user.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
+                                                <NavLink onClick={() => handleDeclineUser(user.id)}><FaTimes size={20} color="red" /></NavLink>
+>>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
                                             </div>
                                         </td>
                                     </tr>
@@ -140,8 +199,12 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
+<<<<<<< HEAD
                                                 <a><BiEdit className="me-3" size={20} /></a>
                                                 <a><BiTrash size={20} color="red" /></a>
+=======
+                                                <NavLink><BiEdit className="me-3" size={20} /></NavLink>
+>>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
                                             </div>
                                     </td>
                                     </tr>

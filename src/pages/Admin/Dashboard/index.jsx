@@ -22,6 +22,10 @@ export const AdminDashboard = () => {
         setIsSideNavbar(!isSideNavbar)
     }
 
+    function handleLogOut() {
+        Cookies.remove('auth')
+    }
+
     useEffect(() => {
         const accessToken = Cookies.get('auth');
         axios({
@@ -65,7 +69,7 @@ export const AdminDashboard = () => {
                             <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
-                        <NavLink className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
+                        <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
                     </div>
                 </div>
                 <h4 className="text-teal-800 font-bold">DASHBOARD</h4>
