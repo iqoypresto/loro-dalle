@@ -17,6 +17,7 @@ export const UserSection = () => {
     const [isSideNavbar, setIsSideNavbar] = useState(true)
     const [confirmatedUser, setConfirmatedUser] = useState([]);
     const [unconfirmatedUser, setUnconfirmatedUser] = useState([]);
+    const [reloadUser, setReloadUser] = useState(false);
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -28,6 +29,46 @@ export const UserSection = () => {
 
     function handleLogOut() {
         Cookies.remove('auth')
+    }
+
+    function handleAcceptUser(id) {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'PUT',
+            url: `${BASE_URL}/users/${id}/confirm`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        }).finally(() => {
+            setReloadUser(true)
+        });
+    }
+
+    function handleDeclineUser(id) {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'DELETE',
+            url: `${BASE_URL}/users/${id}`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },).finally(() => {
+            setReloadUser(true)
+        });
     }
 
     useEffect(() => {
@@ -45,8 +86,10 @@ export const UserSection = () => {
         }).catch((error) => {
             // HANDLE ERROR
             console.log(error);
-        },)
-    }, []);
+        }).finally(() => {
+            setReloadUser(false);
+        });
+    }, [reloadUser]);
 
     return (
         <div className="flex">
@@ -101,8 +144,8 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
-                                                <NavLink><FaCheck className="me-3" size={20} color="green" /></NavLink>
-                                                <NavLink><FaTimes size={20} color="red" /></NavLink>
+                                                <NavLink onClick={() => handleAcceptUser(user.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
+                                                <NavLink onClick={() => handleDeclineUser(user.id)}><FaTimes size={20} color="red" /></NavLink>
                                             </div>
                                         </td>
                                     </tr>
@@ -137,7 +180,6 @@ export const UserSection = () => {
                                         <td className="p-3">
                                             <div className="flex">
                                                 <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                                <NavLink><BiTrash size={20} color="red" /></NavLink>
                                             </div>
                                     </td>
                                     </tr>
