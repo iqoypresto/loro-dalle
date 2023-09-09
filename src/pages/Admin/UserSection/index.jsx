@@ -43,6 +43,7 @@ export const UserSection = () => {
         })
         .then((response) => {
             console.log(response.data)
+            alert(response.data.message)
         }).catch((error) => {
             // HANDLE ERROR
             console.log(error);
@@ -63,6 +64,7 @@ export const UserSection = () => {
         })
         .then((response) => {
             console.log(response.data)
+            alert(response.data.message)
         }).catch((error) => {
             // HANDLE ERROR
             console.log(error);

@@ -55,7 +55,7 @@ export function Register() {
       }).catch((error) => {
         // HANDLE REGISTER ERROR
         console.log(error);
-        alert(error)
+        alert(error.response.data.message)
       });
     }
   }, [formErrors]);
