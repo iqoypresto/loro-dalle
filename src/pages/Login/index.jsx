@@ -37,7 +37,7 @@ export function Login() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    console.log(formValues)
+    // console.log(formValues)
   };
 
   const handleToggle = () => {
@@ -62,12 +62,34 @@ export function Login() {
       }).catch((error) => {
         // HANDLE LOGIN ERROR
         console.log({error});
+        alert(error)
       })
     }
-    else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
-      navigate("/admin-dashboard")
-    }
+    // else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
+    //   navigate("/admin-dashboard")
+    // }
   }, [formErrors]);
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin") {
+      axios.post(`${BASE_URL}/login`, {
+        email: formValues.email,
+        password: formValues.password,
+      }).then((response) => {
+        Cookies.set('auth', response.data.data.accessToken);
+        navigate("/admin-dashboard");
+      }).catch((error) => {
+        // HANDLE LOGIN ERROR
+        console.log({error});
+        alert(error)
+      })
+    }
+    // else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
+    //   navigate("/admin-dashboard")
+    // }
+  }, [formErrors]);
+
+
 
   return (
     <>
