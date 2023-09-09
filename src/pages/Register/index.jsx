@@ -37,11 +37,9 @@ export function Register() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    // console.log(formValues)
   };
 
   useEffect(() => {
-    console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios.post(`${BASE_URL}/signup`, {
         fullname: formValues.fullName,
@@ -50,11 +48,8 @@ export function Register() {
         address: formValues.address,
         password: formValues.password,
       }).then((response) => {
-        console.log({response});
         navigate("/register-success", {replace: true});
       }).catch((error) => {
-        // HANDLE REGISTER ERROR
-        console.log(error);
         alert(error.response.data.message)
       });
     }

@@ -42,7 +42,7 @@ export function Navbar() {
                             <Link>Transkasi</Link>
                         </li>
                         <li>
-                            <Link to="/login" className="last">+ Tukarkan Sampah</Link>
+                            <Link to="/dashboard" className="last">+ Tukarkan Sampah</Link>
                         </li>
                     </ul>
                 </div>

@@ -25,6 +25,7 @@ export function Login() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [fullname, setFullname] = useState(false);
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff)
 
@@ -58,39 +59,17 @@ export function Login() {
         password: formValues.password,
       }).then((response) => {
         Cookies.set('auth', response.data.data.accessToken, { expires: 1 });
-        navigate("/dashboard");
+        setFullname(response.data.data.fullname)
+        if (response.data.data.isAdmin) {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       }).catch((error) => {
-        // HANDLE LOGIN ERROR
-        console.log({error});
         setFormErrors(validate(true));
-        console.log(formErrors)
       })
     }
-    // else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
-    //   navigate("/admin-dashboard")
-    // }
   }, [formErrors]);
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin") {
-      axios.post(`${BASE_URL}/login`, {
-        email: formValues.email,
-        password: formValues.password,
-      }).then((response) => {
-        Cookies.set('auth', response.data.data.accessToken);
-        navigate("/admin-dashboard");
-      }).catch((error) => {
-        // HANDLE LOGIN ERROR
-        console.log({error});
-        alert(error)
-      })
-    }
-    // else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
-    //   navigate("/admin-dashboard")
-    // }
-  }, [formErrors]);
-
-
 
   return (
     <>
@@ -122,12 +101,6 @@ export function Login() {
                 <Icon icon={icon} size={15} className="cursor-pointer me-2" onClick={handleToggle}></Icon>
               </div>
               <p className="text-red-600 text-sm">{formErrors.password}</p>
-              <div className="flex items-center mt-4 border rounded-xl overflow-hidden">
-                <select className="focus:outline-none w-full bg-transparent px-2 py-3" name="role" defaultValue="user" onChange={handleChange}>
-                  <option className="bg-teal-900" value="user">User</option>
-                  <option className="bg-teal-900" value="admin">Admin</option>
-                </select>
-              </div>
               <a href="#" className="text-right w-full block text-xs mt-2 hover:underline">Forgot password?</a>
             </div>
             <button type="submit" className="rounded-xl p-2 block w-full bg-green-500 text-black hover:dark:bg-green-600">Login</button>

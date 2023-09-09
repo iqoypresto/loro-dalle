@@ -2,7 +2,7 @@ import { AdminNavbar } from "../../../components"
 import { FaBars, FaCheck, FaSearch, FaTimes } from "react-icons/fa"
 import { BiEdit } from "react-icons/bi"
 import { IoIosArrowBack } from "react-icons/io"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
@@ -18,6 +18,8 @@ export const SampahSection = () => {
     const [finishedExchanges, setFinishedExchanges] = useState([])
     const [unfinishedExchanges, setUnfinishedExchanges] = useState([])
     const [reloadData, setReloadData] = useState(false)
+    const [isLoad, setIsLoad] = useState(false)
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -39,12 +41,6 @@ export const SampahSection = () => {
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
-        })
-        .then((response) => {
-            console.log(response.data)
-        }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
         }).finally(() => {
             setReloadData(true)
         });
@@ -59,13 +55,7 @@ export const SampahSection = () => {
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
-        })
-        .then((response) => {
-            console.log(response.data)
-        }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
-        },).finally(() => {
+        }).finally(() => {
             setReloadData(true)
         });
     }
@@ -82,16 +72,19 @@ export const SampahSection = () => {
         .then((response) => {
             setFinishedExchanges(response.data.data.finishedTransactions)
             setUnfinishedExchanges(response.data.data.unfinishedTransactions)
-            console.log(response.data)
+            setIsLoad(true)
         }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
+            if (error.response.status === 403 || error.response.status === 401) {
+                navigate('/dashboard')
+            }
         }).finally(() => {
             setReloadData(false)
         })
     }, [reloadData]);
 
     return (
+        <div>
+        { isLoad && (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
                 <button className=" bg-white rounded-full fixed z-50 top-1/2 left-60 md:hidden p-1" onClick={toggleSideNavbar}><IoIosArrowBack size={20} /></button>
@@ -148,6 +141,7 @@ export const SampahSection = () => {
                                         <td className="p-3">{exchange.owner}</td>
                                         <td className="p-3">
                                             <div className="flex">
+                                                <NavLink><BiEdit className="me-3" size={20} /></NavLink>
                                                 <NavLink onClick={() => handleAcceptExchange(exchange.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
                                                 <NavLink onClick={() => handleDeclineExchange(exchange.id)}><FaTimes size={20} color="red" /></NavLink>
                                             </div>
@@ -172,7 +166,6 @@ export const SampahSection = () => {
                                     <th className="text-start p-3">Berat (Kg)</th>
                                     <th className="text-start p-3">Lokasi</th>
                                     <th className="text-start p-3">Dibuat Oleh</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -185,11 +178,6 @@ export const SampahSection = () => {
                                         <td className="p-3">{exchange.weight}</td>
                                         <td className="p-3">{exchange.location}</td>
                                         <td className="p-3">{exchange.owner}</td>
-                                        <td className="p-3">
-                                            <div className="flex">
-                                                <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            </div>
-                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -197,6 +185,8 @@ export const SampahSection = () => {
                     </div>
                 </div>
             </div>
+        </div>
+        )}
         </div>
     )
 }

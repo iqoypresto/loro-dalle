@@ -1,8 +1,7 @@
 import { AdminNavbar } from "../../../components"
 import { FaBars, FaSearch } from "react-icons/fa"
-import { BiEdit, BiTrash } from "react-icons/bi"    
 import { IoIosArrowBack } from "react-icons/io"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
@@ -16,6 +15,9 @@ export const PointSection = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSideNavbar, setIsSideNavbar] = useState(true)
     const [users, setUsers] = useState([])
+    const [isLoad, setIsLoad] = useState(false)
+    const navigate = useNavigate();
+
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
@@ -39,13 +41,18 @@ export const PointSection = () => {
         })
         .then((response) => {
             setUsers(response.data.data.users)
+            setIsLoad(true)
         }).catch((error) => {
             // HANDLE ERROR
-            console.log(error);
+            if (error.response.status === 403 || error.response.status === 401) {
+                navigate('/dashboard')
+            }
         },)
     }, []);
 
     return (
+        <div>
+        { isLoad && (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
                 <button className=" bg-white rounded-full fixed z-50 top-1/2 left-60 md:hidden p-1" onClick={toggleSideNavbar}><IoIosArrowBack size={20} /></button>
@@ -96,6 +103,8 @@ export const PointSection = () => {
                         </table>
                     </div>
             </div>
+        </div>
+        )}
         </div>
     )
 }

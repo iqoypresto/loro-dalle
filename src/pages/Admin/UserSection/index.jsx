@@ -1,8 +1,8 @@
 import { AdminNavbar } from "../../../components"
-import { BiEdit, BiTrash } from "react-icons/bi"
+import { BiEdit } from "react-icons/bi"
 import { FaCheck, FaTimes, FaBars, FaSearch } from "react-icons/fa"
 import { IoIosArrowBack } from "react-icons/io"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
@@ -18,6 +18,8 @@ export const UserSection = () => {
     const [confirmatedUser, setConfirmatedUser] = useState([]);
     const [unconfirmatedUser, setUnconfirmatedUser] = useState([]);
     const [reloadUser, setReloadUser] = useState(false);
+    const [isLoad, setIsLoad] = useState(false)
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -42,11 +44,9 @@ export const UserSection = () => {
             }
         })
         .then((response) => {
-            console.log(response.data)
             alert(response.data.message)
         }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
+            alert(error.response.data.message)
         }).finally(() => {
             setReloadUser(true)
         });
@@ -63,11 +63,9 @@ export const UserSection = () => {
             }
         })
         .then((response) => {
-            console.log(response.data)
             alert(response.data.message)
         }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
+            alert(error.response.data.message)
         },).finally(() => {
             setReloadUser(true)
         });
@@ -85,15 +83,19 @@ export const UserSection = () => {
         .then((response) => {
             setConfirmatedUser(response.data.data.confirmated_users)
             setUnconfirmatedUser(response.data.data.unconfirmated_users)
+            setIsLoad(true)
         }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
+            if (error.response.status === 403 || error.response.status === 401) {
+                navigate('/dashboard')
+            }
         }).finally(() => {
             setReloadUser(false);
         });
     }, [reloadUser]);
 
     return (
+        <div>
+        { isLoad && (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
                 <button className=" bg-white rounded-full fixed z-50 top-1/2 left-60 lg:hidden p-1" onClick={toggleSideNavbar}><IoIosArrowBack size={20} /></button>
@@ -192,6 +194,8 @@ export const UserSection = () => {
                 </div>
 
             </div>
+        </div>
+        )}
         </div>
     )
 }

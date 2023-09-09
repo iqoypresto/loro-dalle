@@ -17,21 +17,14 @@ export function Home() {
         axios.get(`${BASE_URL}/products?limit=3`)
         .then((response) => {
             setProducts(response.data.data.products)
-            console.log(response)
-        }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
-        })
+        }).catch((error) => {})
     }, [])
 
     useEffect(() => {
         axios.get(`${BASE_URL}/testimonies`)
         .then((response) => {
             setTestimonies(response.data.data.testimonies);
-        }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
-        });
+        }).catch((error) => {});
     }, []);
 
     return (

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
@@ -15,6 +16,8 @@ export function UserDashboard() {
     const [isOpenPickUp, setIsOpenPickUp] = useState(false)
     const [isOpenDropOff, setIsOpenDropOff] = useState(false)
     const [profile, setProfile] = useState({})
+    const [isLoad, setIsLoad] = useState(false)
+    const navigate = useNavigate();
 
     function handleClickPickUp() {
         setIsOpenPickUp(!isOpenPickUp);
@@ -34,13 +37,17 @@ export function UserDashboard() {
         })
         .then((response) => {
             setData(response.data.data)
+            setIsLoad(true)
         }).catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
-        },)
+            if (error.response.status === 403 || error.response.status === 401) {
+                navigate('/login')
+            }
+        })
     }, [])
 
     return (
+        <div>
+        { isLoad && (
         <>
             <DashboardNavbar name="Anto Bukan Maen" email="Anto@gmail.com"/>
             {isOpenPickUp &&
@@ -105,5 +112,7 @@ export function UserDashboard() {
             </section>
             <Footer />
         </>
+        )}
+        </div>
     );
 }
