@@ -7,10 +7,15 @@ import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import Cookies from "js-cookie"
+import { useEffect } from "react"
+import axios from "axios"
+
+const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
 
 export const PointSection = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSideNavbar, setIsSideNavbar] = useState(true)
+    const [users, setUsers] = useState([])
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
@@ -21,6 +26,24 @@ export const PointSection = () => {
     function handleLogOut() {
         Cookies.remove('auth')
     }
+
+    useEffect(() => {
+        const accessToken = Cookies.get('auth');
+
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/users/user-total-points`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then((response) => {
+            setUsers(response.data.data.users)
+        }).catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+        },)
+    }, []);
 
     return (
         <div className="flex">
@@ -58,72 +81,17 @@ export const PointSection = () => {
                                 <tr>
                                     <th className="text-start p-3">ID</th>
                                     <th className="text-start p-3">Nama</th>
-                                    <th className="text-start p-3">Email</th>
-                                    <th className="text-start p-3">No. Telepon</th>
-                                    <th></th>
+                                    <th className="text-start p-3">Total Poin</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-3">1</td>
-                                    <td className="p-3">Muhammad Rifqi Maulana</td>
-                                    <td className="p-3">rfqimaulana888@gmail.com</td>
-                                    <td className="p-3">083149606671</td>
-                                    <td className="p-3">
-                                        <div className="flex">
-                                            <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                            <NavLink><BiTrash size={20} color="red" /></NavLink>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {users.length > 0 && users.map((user) => (
+                                    <tr key={user.id}>
+                                        <td className="p-3">{user.id}</td>
+                                        <td className="p-3">{user.fullname}</td>
+                                        <td className="p-3">{user.total_points}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
