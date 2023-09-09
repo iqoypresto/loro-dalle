@@ -84,7 +84,7 @@ export function UserDashboard() {
                             <img src={PickUp} alt="" width={"100%"} />
                             <div className="mt-8">
                                 <h4>Pick Up</h4>
-                                <p className="ellipsis2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatibus temporibus officiis eius laborum! Placeat nisi expedita iste totam dolorem laudantium perferendis hic eos dolor dignissimos deserunt facere ipsam, adipisci consectetur exercitationem eius ex consequuntur perspiciatis ad. Ex fugiat velit veritatis ea praesentium, rerum minus qui illo blanditiis, eligendi saepe tempora enim reprehenderit, perspiciatis ab quia nobis iusto delectus necessitatibus sapiente deleniti. Accusantium, nobis quas amet expedita, nemo quod commodi, quam nulla tempore praesentium facere quaerat. Delectus voluptates in et nobis molestias quae ducimus blanditiis, perspiciatis est. Tempora, pariatur veniam quae officia laudantium unde, aut dolores eligendi iusto blanditiis sed?</p>
+                                <p className="ellipsis2">Loro Dalle': Solusi Mudah untuk Penjemputan Rumah Sampah Anda! Nikmati layanan penjemputan rumah sampah yang cepat, andal, dan ramah lingkungan. Kami hadir untuk menghilangkan beban Anda dalam mengelola sampah dengan menyediakan layanan pengambilan sampah berkala sesuai jadwal yang Anda inginkan. Bergabunglah dengan ribuan pelanggan yang telah mempercayakan kami untuk menjaga lingkungan bersih dan sehat. Segera buat janji penjemputan rumah sampah Anda hari ini!</p>
                                 <span onClick={handleClickPickUp}>
                                     <WhiteButton name="Tukarkan sampah" />
                                 </span>
@@ -94,7 +94,7 @@ export function UserDashboard() {
                             <img src={DropOff} alt="" width={"100%"} />
                             <div className="mt-8">
                                 <h4>Drop Off</h4>
-                                <p className="ellipsis2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos saepe error aliquid dicta eos, iure distinctio quidem aut, veritatis nesciunt optio dolorum perferendis fuga reiciendis maiores placeat commodi, omnis nihil? Nihil quidem suscipit corrupti ea fuga quasi beatae assumenda, optio alias tempora consequatur at reiciendis nobis fugiat. Tenetur, nulla magnam? Exercitationem, inventore aut illo dicta enim obcaecati, minus cupiditate similique pariatur vero iure quos delectus a sapiente! Ratione maiores doloribus modi fugiat eveniet quos culpa ab. Laborum labore cumque quod commodi earum atque suscipit officia veritatis, saepe cupiditate vel aliquid voluptate, unde expedita possimus at aspernatur culpa, molestiae in est.</p>
+                                <p className="ellipsis2">Drop Off Sampah dengan Mudah dan Bertanggung Jawab di Loro Dalle'! Kami mengerti bahwa kadang-kadang Anda memiliki barang yang sudah tidak terpakai lagi, tetapi Anda ingin membuangnya dengan benar. Dengan Loro Dalle', Anda dapat menemukan tempat 'Drop Off' yang aman dan ramah lingkungan untuk membuang barang-barang tersebut</p>
                                 <span onClick={handleClickDropOff}>
                                     <WhiteButton name="Tukarkan sampah" />
                                 </span>
