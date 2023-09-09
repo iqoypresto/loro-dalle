@@ -25,6 +25,10 @@ export const SampahSection = () => {
         setIsSideNavbar(!isSideNavbar)
     }
 
+    function handleLogOut() {
+        Cookies.remove('auth')
+    }
+
     useEffect(() => {
         const accessToken = Cookies.get('auth');
         axios({
@@ -69,7 +73,7 @@ export const SampahSection = () => {
                             <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
-                        <NavLink className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
+                        <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
                     </div>
                 </div>
                 <div className="border-b-2 border-b-teal-700 pb-10 mb-8 w-full">

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import Profile from "../../../assets/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md"
+import Cookies from "js-cookie"
 
 export const PointSection = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -16,6 +17,11 @@ export const PointSection = () => {
     const toggleSideNavbar = () => {
         setIsSideNavbar(!isSideNavbar)
     }
+
+    function handleLogOut() {
+        Cookies.remove('auth')
+    }
+
     return (
         <div className="flex">
             <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
@@ -41,7 +47,7 @@ export const PointSection = () => {
                             <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
-                        <NavLink className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
+                        <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>
                     </div>
                 </div>
                 <h4 className="text-teal-800 font-bold">POINT</h4>

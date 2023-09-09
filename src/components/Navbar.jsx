@@ -5,6 +5,7 @@ import { useState } from "react";
 import { LiaHomeSolid } from "react-icons/lia"
 import { GiSwapBag } from "react-icons/gi"
 import Profile from "../assets/profile.png"
+import Cookies from "js-cookie";
 
 export function Navbar() {
 
@@ -71,6 +72,10 @@ export function DashboardNavbar() {
         setIsProfile(!isProfile)
     }
 
+    function handleLogOut() {
+        Cookies.remove('auth')
+    }
+
     window.addEventListener('scroll', changeOpacity)
     return (
         <>
@@ -107,7 +112,7 @@ export function DashboardNavbar() {
                                     </div>
                                     <div className="menu mt-3 gap-y-2 flex flex-col">
                                         <Link className="py-1">Profile Setting</Link>
-                                        <Link to="/" className="py-1">Log Out</Link>
+                                        <Link onClick={handleLogOut} to="/" className="py-1">Log Out</Link>
                                     </div>
                                 </div>
                             </li>
