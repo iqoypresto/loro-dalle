@@ -62,12 +62,8 @@ export function Login() {
       }).catch((error) => {
         // HANDLE LOGIN ERROR
         console.log({error});
-<<<<<<< HEAD
         setFormErrors(validate(true));
         console.log(formErrors)
-=======
-        alert(error)
->>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
       })
     }
     // else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
