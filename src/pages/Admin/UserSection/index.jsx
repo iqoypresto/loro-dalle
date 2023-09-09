@@ -27,14 +27,6 @@ export const UserSection = () => {
         setIsSideNavbar(!isSideNavbar)
     }
 
-<<<<<<< HEAD
-    const handleAccept = (id) => {
-        console.log(id)
-    }
-
-    const handleReject = () => {
-
-=======
     function handleLogOut() {
         Cookies.remove('auth')
     }
@@ -77,7 +69,6 @@ export const UserSection = () => {
         },).finally(() => {
             setReloadUser(true)
         });
->>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
     }
 
     useEffect(() => {
@@ -94,17 +85,11 @@ export const UserSection = () => {
             setUnconfirmatedUser(response.data.data.unconfirmated_users)
         }).catch((error) => {
             // HANDLE ERROR
-<<<<<<< HEAD
-            console.log(error.response.data.message);
-        },)
-    }, []);
-=======
             console.log(error);
         }).finally(() => {
             setReloadUser(false);
         });
     }, [reloadUser]);
->>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
 
     return (
         <div className="flex">
@@ -159,13 +144,8 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
-<<<<<<< HEAD
-                                                <NavLink onClick={()=> handleAccept(user.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
-                                                <NavLink onClick={handleReject}><FaTimes size={20} color="red" /></NavLink>
-=======
                                                 <NavLink onClick={() => handleAcceptUser(user.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
                                                 <NavLink onClick={() => handleDeclineUser(user.id)}><FaTimes size={20} color="red" /></NavLink>
->>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
                                             </div>
                                         </td>
                                     </tr>
@@ -199,12 +179,7 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
-<<<<<<< HEAD
-                                                <a><BiEdit className="me-3" size={20} /></a>
-                                                <a><BiTrash size={20} color="red" /></a>
-=======
                                                 <NavLink><BiEdit className="me-3" size={20} /></NavLink>
->>>>>>> 350907799386e41c3c2c263fb778c7989a3b7552
                                             </div>
                                     </td>
                                     </tr>
