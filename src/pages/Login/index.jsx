@@ -62,6 +62,8 @@ export function Login() {
       }).catch((error) => {
         // HANDLE LOGIN ERROR
         console.log({error});
+        setFormErrors(validate(true));
+        console.log(formErrors)
       })
     }
     else if (Object.keys(formErrors).length === 0 && isSubmit && formValues.role === "admin"){
@@ -85,7 +87,7 @@ export function Login() {
               <div className="flex items-center border rounded-xl overflow-hidden bg-teal-900">
                 <BiUser className="ms-1" size={25} />
                 <div className="user-input-wrp">
-                  <input className="inputText block w-full bg-transparent py-3 px-2 focus:outline-none" type="text" name="email" onChange={handleChange} required />
+                  <input className="inputText block w-full bg-transparent py-3 px-2 focus:outline-none" type="text" name="email" onChange={handleChange} required/>
                   <span className="floating-label">Email/Nomor Telepon</span>
                 </div>
               </div>
@@ -93,7 +95,7 @@ export function Login() {
               <div className="flex items-center mt-4 border rounded-xl overflow-hidden bg-teal-900">
                 <BiLockAlt className="ms-1" size={25} />
                 <div className="user-input-wrp">
-                  <input className="inputText block w-full bg-transparent py-3 px-2 focus:outline-none" type={type} name="password" onChange={handleChange} required/>
+                  <input className="inputText block w-full bg-transparent py-3 px-2 focus:outline-none" type={type} name="password" onChange={handleChange} required />
                   <span className="floating-label">Password</span>
                 </div>
                 <Icon icon={icon} size={15} className="cursor-pointer me-2" onClick={handleToggle}></Icon>

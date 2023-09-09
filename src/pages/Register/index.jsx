@@ -19,7 +19,7 @@ export function Register() {
     password: "",
     confirmPassword: "",
     role: "user",
-    status: "unconfirmated"
+    confimationStatus: false,
   };
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);

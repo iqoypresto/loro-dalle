@@ -26,6 +26,14 @@ export const UserSection = () => {
         setIsSideNavbar(!isSideNavbar)
     }
 
+    const handleAccept = (id) => {
+        console.log(id)
+    }
+
+    const handleReject = () => {
+
+    }
+
     useEffect(() => {
         const accessToken = Cookies.get('auth');
         axios({
@@ -40,7 +48,7 @@ export const UserSection = () => {
             setUnconfirmatedUser(response.data.data.unconfirmated_users)
         }).catch((error) => {
             // HANDLE ERROR
-            console.log(error);
+            console.log(error.response.data.message);
         },)
     }, []);
 
@@ -97,8 +105,8 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
-                                                <NavLink><FaCheck className="me-3" size={20} color="green" /></NavLink>
-                                                <NavLink><FaTimes size={20} color="red" /></NavLink>
+                                                <NavLink onClick={()=> handleAccept(user.id)}><FaCheck className="me-3" size={20} color="green" /></NavLink>
+                                                <NavLink onClick={handleReject}><FaTimes size={20} color="red" /></NavLink>
                                             </div>
                                         </td>
                                     </tr>
@@ -132,8 +140,8 @@ export const UserSection = () => {
                                         <td className="p-3">{user.address}</td>
                                         <td className="p-3">
                                             <div className="flex">
-                                                <NavLink><BiEdit className="me-3" size={20} /></NavLink>
-                                                <NavLink><BiTrash size={20} color="red" /></NavLink>
+                                                <a><BiEdit className="me-3" size={20} /></a>
+                                                <a><BiTrash size={20} color="red" /></a>
                                             </div>
                                     </td>
                                     </tr>
