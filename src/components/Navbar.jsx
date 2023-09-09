@@ -107,7 +107,7 @@ export function DashboardNavbar(x) {
                                 <div className={`profile-setting ${isProfile ? "drop-shadow-2xl z-10" : "hidden"}`}>
                                     <div className="flex flex-col items-center">
                                         <img src={Profile} alt="" width={60} height={60} />
-                                        <h5>{x.name}</h5>
+                                        <h5>{x.username}</h5>
                                         <p className="font-light text-xs">{x.email}</p>
                                     </div>
                                     <div className="menu mt-3 gap-y-2 flex flex-col">

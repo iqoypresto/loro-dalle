@@ -44,7 +44,7 @@ export function Home() {
             <section id="about">
                 <div className="content">
                     <TealHeader title="Tentang Loro Dalle'" />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, quidem inventore delectus quis placeat suscipit animi aliquam impedit fugit voluptatem, distinctio eius reiciendis magni itaque mollitia est repudiandae quas, molestiae neque recusandae culpa eos blanditiis. Quia aut aliquam atque illo eligendi inventore temporibus, corporis a, nisi vero id, cum earum.</p>
+                    <p>Selamat datang di Loro Dalle' - Rumah Digital Anda untuk Solusi Rumah Sampah! Kami adalah komunitas online yang peduli tentang pengelolaan rumah sampah dan kelestarian lingkungan. Di Loro Dalle', kami menghadirkan informasi terkini, panduan praktis, dan layanan yang memudahkan Anda dalam menjaga kebersihan dan keberlanjutan lingkungan. Sama-sama kita berkontribusi untuk menciptakan dunia yang lebih hijau dan berkelanjutan. Bergabunglah dengan kami di Loro Dalle' hari ini, dan bersama-sama kita jadikan perubahan positif untuk masa depan planet kita!</p>
                 </div>
             </section>
             <section id="layanan">
@@ -56,7 +56,7 @@ export function Home() {
                         </div>
                         <div className=" md:col-span-5">
                             <h4>Pick Up</h4>
-                            <p className="ellipsis3 my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consequatur dolor reiciendis quae a, laborum, sint non harum voluptates dolore quam inventore temporibus. Voluptatem quae, saepe possimus in accusamus sint non laborum maxime modi odio debitis assumenda quis ut ducimus corporis sequi aliquam vero aut suscipit. Modi in asperiores saepe.</p>
+                            <p className="ellipsis3 my-4">Loro Dalle': Solusi Mudah untuk Penjemputan Rumah Sampah Anda! Nikmati layanan penjemputan rumah sampah yang cepat, andal, dan ramah lingkungan. Kami hadir untuk menghilangkan beban Anda dalam mengelola sampah dengan menyediakan layanan pengambilan sampah berkala sesuai jadwal yang Anda inginkan. Bergabunglah dengan ribuan pelanggan yang telah mempercayakan kami untuk menjaga lingkungan bersih dan sehat. Segera buat janji penjemputan rumah sampah Anda hari ini!</p>
                             <WhiteButton name="Lihat selengkapnya" />
                         </div>
                         <div className="md:col-start-6 md:col-span-4">
@@ -65,7 +65,7 @@ export function Home() {
                         </div>
                         <div className="md:row-start-2 md:col-span-5">
                             <h4>Drop Off</h4>
-                            <p className="ellipsis3 my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consequatur dolor reiciendis quae a, laborum, sint non harum voluptates dolore quam inventore temporibus. Voluptatem quae, saepe possimus in accusamus sint non laborum maxime modi odio debitis assumenda quis ut ducimus corporis sequi aliquam vero aut suscipit. Modi in asperiores saepe.</p>
+                            <p className="ellipsis3 my-4">Drop Off Sampah dengan Mudah dan Bertanggung Jawab di Loro Dalle'! Kami mengerti bahwa kadang-kadang Anda memiliki barang yang sudah tidak terpakai lagi, tetapi Anda ingin membuangnya dengan benar. Dengan Loro Dalle', Anda dapat menemukan tempat 'Drop Off' yang aman dan ramah lingkungan untuk membuang barang-barang tersebut</p>
                             <WhiteButton name="Lihat selengkapnya" />
                         </div>
                     </div>
