@@ -13,7 +13,7 @@ import bgBotRight from "../../assets/ellipse-3.svg";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+const BASE_URL = 'https://api.lorodalle.id';
 
 export function Login() {
   const initialValues = {
@@ -66,6 +66,9 @@ export function Login() {
           navigate("/dashboard");
         }
       }).catch((error) => {
+        if (error.response.status === 409) {
+          navigate("/register-success")
+        }
         setFormErrors(validate(true));
       })
     }

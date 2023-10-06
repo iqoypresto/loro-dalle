@@ -9,7 +9,7 @@ import { MdKeyboardArrowDown } from "react-icons/md"
 import axios from "axios"
 import Cookies from "js-cookie"
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+const BASE_URL = 'https://api.lorodalle.id';
 
 export const ProductSection = () => {
     const [products, setProducts] = useState([]);
@@ -30,7 +30,10 @@ export const ProductSection = () => {
     }
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/products?limit=3`)
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/products`,
+        })
         .then((response) => {
             setProducts(response.data.data.products)
             setIsLoad(true)
@@ -38,6 +41,8 @@ export const ProductSection = () => {
             // HANDLE ERROR
             if (error.response.status === 403 || error.response.status === 401) {
                 navigate('/dashboard')
+            } else {
+                navigate('/')
             }
         })
     }, []);
@@ -65,7 +70,6 @@ export const ProductSection = () => {
                     <div className="relative">
                         <button className="flex items-center py-3 px-2" onClick={handleClick}>
                             <img src={Profile} alt="" width={35} height={35} />
-                            <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
                         <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>

@@ -6,9 +6,6 @@ export function validate (values) {
     if (!values.telNumber) {
       errors.telNumber = "Harap isi kolom ini!";
     }
-    if (!values.email) {
-      errors.email = "Harap isi kolom ini!";
-    }
     if (!values.password) {
       errors.password = "Harap isi kolom ini!";
     }

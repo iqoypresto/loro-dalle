@@ -9,7 +9,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+const BASE_URL = 'https://api.lorodalle.id';
 
 export function UserDashboard() {
     const [data, setData] = useState({})
@@ -28,12 +28,16 @@ export function UserDashboard() {
 
     useEffect(() => {
         const accessToken = Cookies.get('auth');
+        if (!accessToken) {
+            navigate('/login')
+        }
         axios({
             method: 'GET',
             url: `${BASE_URL}/users/user-dashboard-data`,
             headers: {
                 'Authorization': `Bearer ${accessToken}`
-            }
+            },
+            withCredentials: true
         })
         .then((response) => {
             setData(response.data.data)
@@ -41,6 +45,8 @@ export function UserDashboard() {
         }).catch((error) => {
             if (error.response.status === 403 || error.response.status === 401) {
                 navigate('/login')
+            } else {
+                navigate('/')
             }
         })
     }, [])
@@ -49,7 +55,7 @@ export function UserDashboard() {
         <div>
         { isLoad && (
         <>
-            <DashboardNavbar name="Anto Bukan Maen" email="Anto@gmail.com"/>
+            <DashboardNavbar name="User" email="-"/>
             {isOpenPickUp &&
                 <FormPickUp />
             }

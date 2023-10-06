@@ -6,22 +6,27 @@ import product from "../../assets/product.png"
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
-
+const BASE_URL = 'https://api.lorodalle.id';
 
 export function Home() {
     const [products, setProducts] = useState([]);
     const [testimonies, setTestimonies] = useState([]);
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/products?limit=3`)
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/products?limit=3`,
+        })
         .then((response) => {
             setProducts(response.data.data.products)
         }).catch((error) => {})
     }, [])
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/testimonies`)
+        axios({
+            method: 'GET',
+            url: `${BASE_URL}/testimonies`,
+        })
         .then((response) => {
             setTestimonies(response.data.data.testimonies);
         }).catch((error) => {});

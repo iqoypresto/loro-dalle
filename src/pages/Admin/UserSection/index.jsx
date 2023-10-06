@@ -10,7 +10,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import Cookies from "js-cookie"
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+const BASE_URL = 'https://api.lorodalle.id';
 
 export const UserSection = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -73,12 +73,17 @@ export const UserSection = () => {
 
     useEffect(() => {
         const accessToken = Cookies.get('auth');
+        if (!accessToken) {
+            navigate('/login')
+        }
+
         axios({
             method: 'GET',
             url: `${BASE_URL}/users`,
             headers: {
                 'Authorization': `Bearer ${accessToken}`
-            }
+            },
+            withCredentials: true,
         })
         .then((response) => {
             setConfirmatedUser(response.data.data.confirmated_users)
@@ -87,6 +92,8 @@ export const UserSection = () => {
         }).catch((error) => {
             if (error.response.status === 403 || error.response.status === 401) {
                 navigate('/dashboard')
+            } else {
+                navigate('/')
             }
         }).finally(() => {
             setReloadUser(false);
@@ -117,7 +124,6 @@ export const UserSection = () => {
                     <div className="relative">
                         <button className="flex items-center py-3 px-2" onClick={handleClick}>
                             <img src={Profile} alt="" width={35} height={35} />
-                            <p className="ms-2 me-5 text-sm font-semibold text-teal-900">Bapak Rafli</p>
                             <MdKeyboardArrowDown />
                         </button>
                         <NavLink onClick={handleLogOut} className={`absolute right-0 p-3 border drop-shadow hover:bg-gray-100 ${isOpen ? "" : "hidden"}`} to="/" replace="true">Log Out</NavLink>

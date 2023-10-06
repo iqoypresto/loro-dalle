@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
-import { validate } from "../pages/User/Dashboard/FormValidation";
+import { validate, validateDropOff } from "../pages/User/Dashboard/FormValidation";
 import { FaTimes } from "react-icons/fa";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+const BASE_URL = 'https://api.lorodalle.id';
 
 export function FormPickUp() {
     const initialValues = {
@@ -17,6 +18,7 @@ export function FormPickUp() {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -25,7 +27,6 @@ export function FormPickUp() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-        console.table(formValues)
     }
 
     const handleSubmit = (e) => {
@@ -35,9 +36,13 @@ export function FormPickUp() {
     }
 
     useEffect(() => {
-        console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             const accessToken = Cookies.get('auth');
+
+            if (!accessToken) {
+                navigate('/login')
+            }
+
             axios({
                 method: 'POST',
                 url: `${BASE_URL}/trash-transactions/pick-up`,
@@ -49,12 +54,14 @@ export function FormPickUp() {
                     type: formValues.jenisSampah,
                     weight: formValues.berat,
                     location: formValues.titikJemput,
-                }
-            }).then((response) => console.log(response.data)).catch((error) => {
+                },
+                withCredentials: true,
+            }).then((response) => {
+                setIsOpen(!isOpen)
+            }).catch((error) => {
                 // HANDLE ERROR HERE
-                console.log(error);
+                alert(`Gagal membuat penukarana. ${error.response.data.message}`)
             });
-            setIsOpen(!isOpen)
         }
     }, [formErrors])
 
@@ -94,10 +101,62 @@ export function FormPickUp() {
 }
 
 export function FormDropOff() {
+    const initialValues = {
+        fullName: "",
+        jenisSampah: "",
+        berat: "",
+    }
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
     const [isOpen, setIsOpen] = useState(true);
+    const [isSubmit, setIsSubmit] = useState(false);
+    const navigate = useNavigate()
+
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validateDropOff(formValues));
+        setIsSubmit(true);
+    }
+
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+            const accessToken = Cookies.get('auth');
+            
+            if (!accessToken) {
+                navigate('/login')
+            }
+
+            axios({
+                method: 'POST',
+                url: `${BASE_URL}/trash-transactions/drop-off`,
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                data: {
+                    fullname: formValues.fullName,
+                    type: formValues.jenisSampah,
+                    weight: formValues.berat,
+                },
+                withCredentials: true,
+            }).then((response) => {
+                setIsOpen(!isOpen)
+            }).catch((error) => {
+                // HANDLE ERROR HERE
+                alert(`Gagal membuat penukarana. ${error.response.data.message}`)
+            });
+            
+        }
+    }, [formErrors])
+
     return (
         <>
             {isOpen &&
@@ -106,18 +165,18 @@ export function FormDropOff() {
                         <FaTimes className="icon" onClick={handleClick} />
                         <div className="form-content">
                             <h4>Form Drop Off</h4>
-                            <form action="">
-                                <label htmlFor="name">Nama</label>
-                                <input type="text" id="name" name="name" placeholder="eg: Budi Santoso" />
+                            <form action="" onSubmit={handleSubmit}>
+                                <label htmlFor="fullName">Nama</label>
+                                <input type="text" id="fullName" name="fullName" placeholder="eg: Budi Santoso" onChange={handleChange} />
                                 <p className="text-red-600 mb-3"></p>
-                                <label htmlFor="name">Jenis sampah</label>
-                                <select id="jenis-sampah" name="jenis-sampah" defaultValue="">
+                                <label htmlFor="jenisSampah">Jenis sampah</label>
+                                <select id="jenisSampah" name="jenisSampah" defaultValue="" onChange={handleChange}>
                                     <option value="" disabled>Klik untuk memilih jenis sampah</option>
                                     <option value="organik">Organik</option>
-                                    <option value="non-organik">Non-Organik</option>
+                                    <option value="anorganik">Non-Organik</option>
                                 </select>
                                 <label htmlFor="berat">Berat sampah (perkiraan)</label>
-                                <input type="number" id="berat" name="berat" placeholder="eg: 2" />
+                                <input type="number" id="berat" name="berat" placeholder="eg: 2" onChange={handleChange} />
                                 <p className="text-red-600 mb-3"></p>
                                 <p className="text-red-600 mb-3"></p>
                                 <button type="submit">Submit</button>

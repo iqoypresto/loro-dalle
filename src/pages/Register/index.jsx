@@ -8,7 +8,8 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff"
 import ValidationImg from "../../assets/reg-validation.svg";
 import axios from "axios";
 
-const BASE_URL = 'https://brave-pike-sheath-dress.cyclic.app';
+const BASE_URL = 'http://localhost:5000';
+
 
 export function Register() {
   const initialValues = {
@@ -18,7 +19,6 @@ export function Register() {
     address: "",
     password: "",
     confirmPassword: "",
-    role: "user",
     confimationStatus: false,
   };
   const navigate = useNavigate();
@@ -41,10 +41,11 @@ export function Register() {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log({tes: formValues.email || null})
       axios.post(`${BASE_URL}/signup`, {
         fullname: formValues.fullName,
         phone_number: formValues.telNumber,
-        email: formValues.email,
+        email: formValues.email || null,
         address: formValues.address,
         password: formValues.password,
       }).then((response) => {
@@ -117,7 +118,6 @@ export function Register() {
               value={formValues.email}
               onChange={handleChange}
             ></input>
-            <p className="text-red-600 mb-2">{formErrors.email}</p>
           </div>
           <div>
             <label className="text-black">Alamat</label>
@@ -131,14 +131,6 @@ export function Register() {
               onChange={handleChange}
             ></input>
             <p className="text-red-600 mb-2">{formErrors.address}</p>
-          </div>
-          <div>
-            <label className="text-black" htmlFor="">Role</label>
-            <select className="block border shadow rounded w-full h-9
-                my-2 px-2 text-black" name="role" id="role" defaultValue="user" onChange={handleChange}>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
           </div>
           <div>
                 <label className="text-black">Kata Sandi</label>
@@ -205,7 +197,7 @@ export function RegisterSuccess(){
                 <img src={ValidationImg}></img>
             </div>
             <div className="reg-header">
-                <TealHeader title="Selamat! Anda telah membuat akun"/>
+                <TealHeader title="Selamat! Akun Anda telah dibuat"/>
             </div>
             <div className="mx-auto text-center max-w-3xl">
                 Selanjutnya, akan divalidasi terlebih dahulu oleh lembaga terkait. Silahkan cek di email atau di WhatsApp anda (WA) anda untuk mengetahui apakah pembuatan akun diterima atau tidak.
