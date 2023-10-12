@@ -243,7 +243,6 @@ export const ProductSection = () => {
                     <th className="text-start p-3">Harga (Rp)</th>
                     <th className="text-start p-3">Stok</th>
                     <th className="text-start p-3">Jenis</th>
-                    <th className="text-start p-3">Pemilik</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -257,7 +256,6 @@ export const ProductSection = () => {
                         <td className="p-3">{prod.price}</td>
                         <td className="p-3">{prod.stock}</td>
                         <td className="p-3">{prod.type}</td>
-                        <td className="p-3">{prod.owner}</td>
                         <td className="p-3">
                           <div className="flex">
                             <NavLink

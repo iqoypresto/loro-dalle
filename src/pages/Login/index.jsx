@@ -61,7 +61,6 @@ export function Login() {
           }
         });
     } else {
-      console.log("OK");
       setIsSubmit(false);
     }
   };

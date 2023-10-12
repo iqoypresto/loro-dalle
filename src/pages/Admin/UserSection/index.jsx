@@ -1,4 +1,4 @@
-import { AdminNavbar } from "../../../components";
+import { AdminNavbar, FormEditUser, TealButton } from "../../../components";
 import { BiEdit } from "react-icons/bi";
 import { FaCheck, FaTimes, FaBars, FaSearch } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
@@ -8,7 +8,6 @@ import Profile from "../../../assets/profile.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { BASE_URL } from "../../../constant";
@@ -24,8 +23,10 @@ export const UserSection = () => {
   const [isSideNavbar, setIsSideNavbar] = useState(true);
   const [confirmatedUser, setConfirmatedUser] = useState([]);
   const [unconfirmatedUser, setUnconfirmatedUser] = useState([]);
-  const [reloadUser, setReloadUser] = useState(false);
+  const [reloadUser, setReloadUser] = useState(true);
   const [isLoad, setIsLoad] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const [isOpenEditUser, setIsOpenEditUser] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,13 +39,26 @@ export const UserSection = () => {
   };
 
   function handleLogOut() {
-    Cookies.remove("auth");
+    dispatch(logout());
+  }
+
+  function handleEditUser(idx) {
+    setActiveIdx(idx);
+    setIsOpenEditUser(true);
+  }
+
+  function onCloseEditForm() {
+    setIsOpenEditUser(false);
+  }
+
+  function onUpdateUser() {
+    setReloadUser(true);
   }
 
   function handleAcceptUser(id) {
     const authHeader = authService.authHeader();
     if (!authHeader) {
-        navigate("/login");
+      navigate("/login");
     }
 
     axios({
@@ -72,7 +86,7 @@ export const UserSection = () => {
   function handleDeclineUser(id) {
     const authHeader = authService.authHeader();
     if (!authHeader) {
-        navigate("/login");
+      navigate("/login");
     }
 
     SwalReact.fire({
@@ -110,52 +124,61 @@ export const UserSection = () => {
   }
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-
-    if (!isAdmin) {
-      navigate("/dashboard");
-    }
-
-    const authHeader = authService.authHeader();
-    if (!authHeader) {
+    if (reloadUser) {
+      if (!isAuthenticated) {
         navigate("/login");
-    }
+      }
 
-    setIsLoad(true);
+      if (!isAdmin) {
+        navigate("/dashboard");
+      }
 
-    axios({
-      method: "GET",
-      url: `${BASE_URL}/users`,
-      headers: {
-        ...authHeader,
-      },
-      withCredentials: true,
-    })
-      .then((response) => {
-        setConfirmatedUser(response.data.data.confirmated_users);
-        setUnconfirmatedUser(response.data.data.unconfirmated_users);
+      const authHeader = authService.authHeader();
+      if (!authHeader) {
+        navigate("/login");
+      }
+
+      setIsLoad(true);
+
+      axios({
+        method: "GET",
+        url: `${BASE_URL}/users`,
+        headers: {
+          ...authHeader,
+        },
+        withCredentials: true,
       })
-      .catch((error) => {
-        if (error.response.status === 403) {
-          navigate("/dashboard");
-        } else if (error.response.status === 401) {
+        .then((response) => {
+          setConfirmatedUser(response.data.data.confirmated_users);
+          setUnconfirmatedUser(response.data.data.unconfirmated_users);
+        })
+        .catch((error) => {
+          if (error.response.status === 403) {
+            navigate("/dashboard");
+          } else if (error.response.status === 401) {
             dispatch(logout());
             navigate("/login");
-        } else {
-          navigate("/");
-        }
-      })
-      .finally(() => {
-        setReloadUser(false);
-      });
+          } else {
+            navigate("/");
+          }
+        })
+        .finally(() => {
+          setReloadUser(false);
+        });
+    }
   }, [reloadUser]);
 
   return (
     <div>
       {isLoad && (
         <div className="flex">
+          {isOpenEditUser && (
+            <FormEditUser
+              data={unconfirmatedUser[activeIdx]}
+              onClose={onCloseEditForm}
+              onUpdate={onUpdateUser}
+            />
+          )}
           <span className={`relative ${isSideNavbar ? "" : "hidden"}`}>
             <button
               className=" bg-white rounded-full fixed z-50 top-1/2 left-60 lg:hidden p-1"
@@ -222,7 +245,7 @@ export const UserSection = () => {
                   </thead>
                   <tbody>
                     {unconfirmatedUser.length > 0 &&
-                      unconfirmatedUser.map((user) => (
+                      unconfirmatedUser.map((user, idx) => (
                         <tr key={user.id}>
                           <td className="p-3">{user.id}</td>
                           <td className="p-3">{user.fullname}</td>
@@ -231,6 +254,9 @@ export const UserSection = () => {
                           <td className="p-3">{user.address}</td>
                           <td className="p-3">
                             <div className="flex">
+                              <NavLink onClick={() => handleEditUser(idx)}>
+                                <BiEdit className="me-3" size={20} />
+                              </NavLink>
                               <NavLink
                                 onClick={() => handleAcceptUser(user.id)}
                               >
@@ -270,7 +296,7 @@ export const UserSection = () => {
                   </thead>
                   <tbody>
                     {confirmatedUser.length > 0 &&
-                      confirmatedUser.map((user) => (
+                      confirmatedUser.map((user, idx) => (
                         <tr key={user.id}>
                           <td className="p-3">{user.id}</td>
                           <td className="p-3">{user.fullname}</td>
@@ -279,9 +305,9 @@ export const UserSection = () => {
                           <td className="p-3">{user.address}</td>
                           <td className="p-3">
                             <div className="flex">
-                              <NavLink>
-                                <BiEdit className="me-3" size={20} />
-                              </NavLink>
+                              {/* <NavLink onClick={() => handleEditUser(idx)}>
+                                <TealButton name="Reset Password"></TealButton>
+                              </NavLink> */}
                             </div>
                           </td>
                         </tr>

@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Profile from "../../../assets/profile.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import Cookies from "js-cookie";
 import { useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../constant";
@@ -30,7 +29,7 @@ export const PointSection = () => {
   };
 
   function handleLogOut() {
-    Cookies.remove("auth");
+    dispatch(logout());
   }
 
   useEffect(() => {

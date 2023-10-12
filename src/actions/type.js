@@ -1,2 +1,3 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
+export const EDIT_PROFILE_SUCCESS  = "EDIT_PROFILE_SUCCESS ";

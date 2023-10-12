@@ -8,7 +8,6 @@ import Profile from "../../../assets/profile.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { BASE_URL } from "../../../constant";
@@ -38,7 +37,7 @@ export const SampahSection = () => {
   };
 
   function handleLogOut() {
-    Cookies.remove("auth");
+    dispatch(logout());
   }
 
   function handleEditExchange(idx) {
@@ -176,6 +175,16 @@ export const SampahSection = () => {
     }
   }, [reloadData]);
 
+  const formatDate = (date) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+    return new Date(date).toLocaleDateString("id-ID", options)
+  }
+
   return (
     <div>
       {isLoad && (
@@ -311,6 +320,7 @@ export const SampahSection = () => {
                       <th className="text-start p-3">Berat (Kg)</th>
                       <th className="text-start p-3">Lokasi</th>
                       <th className="text-start p-3">Dibuat Oleh</th>
+                      <th className="text-start p-3">Disetujui Pada</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -324,6 +334,7 @@ export const SampahSection = () => {
                           <td className="p-3">{exchange.weight}</td>
                           <td className="p-3">{exchange.location}</td>
                           <td className="p-3">{exchange.owner}</td>
+                          <td className="p-3">{formatDate(exchange.updated_at)}</td>
                         </tr>
                       ))}
                   </tbody>

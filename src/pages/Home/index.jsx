@@ -19,23 +19,18 @@ import { BASE_URL } from "../../constant";
 
 export function Home() {
   const [products, setProducts] = useState([]);
-  const [testimonies, setTestimonies] = useState([]);
+  const testimonies = [{
+    content: 'Saya senang bisa mendukung penukaran sampah melalui website ini. Produk olahan yang didapatkan dari sampah sangat berkualitas. Selain membantu lingkungan, saya juga mendapatkan barang yang berguna.',
+    fullname: 'Daeng Rafli',
+    position: 'Pembeli Produk Olahan',
+  }]
 
   useEffect(() => {
     axios({
       method: "GET",
-      url: `${BASE_URL}/products?limit=3`,
+      url: `${BASE_URL}/products`,
     }).then((response) => {
       setProducts(response.data.data.products);
-    });
-  }, []);
-
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: `${BASE_URL}/testimonies`,
-    }).then((response) => {
-      setTestimonies(response.data.data.testimonies);
     });
   }, []);
 
@@ -118,7 +113,7 @@ export function Home() {
       <section id="produk">
         <div className="content">
           <TealHeader title="Produk" />
-          <div className="grid md:grid-cols-3  gap-11 flex-wrap">
+          <div className="grid md:grid-cols-3 place-items-center gap-11 flex-wrap">
             {products.length > 0 &&
               products.map((prod) => (
                 <HomeCard key={prod.id} src={product} product={prod} />

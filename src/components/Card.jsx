@@ -13,7 +13,7 @@ export function HomeCard({ src, product }) {
         </div>
         <div className="px-6 py-4">
           <a
-            href={"/products/" + product.slug + "/" + product.id}
+            href={"#"}
             className="text-teal-800 underline hover:text-teal-950"
           >
             Dapatkan {product.title}

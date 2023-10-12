@@ -9,6 +9,7 @@ import {
   WhiteButton,
   FormPickUp,
   FormDropOff,
+  FormEditPickUp,
 } from "../../../components";
 import DropOff from "../../../assets/drop-off-dashboard.png";
 import PickUp from "../../../assets/pick-up-dashboard.png";
@@ -20,6 +21,13 @@ import { BASE_URL } from "../../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import authService from "../../../services/authService";
 import { logout } from "../../../actions/authAction";
+import { NavLink } from "react-router-dom";
+import { BiEdit } from "react-icons/bi";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
+const SwalReact = withReactContent(Swal);
 
 export function UserDashboard() {
   const { user, isAdmin } = useSelector((state) => state.auth);
@@ -27,15 +35,137 @@ export function UserDashboard() {
   const [isOpenPickUp, setIsOpenPickUp] = useState(false);
   const [isOpenDropOff, setIsOpenDropOff] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
+  const [finishedExchanges, setFinishedExchanges] = useState([]);
+  const [unfinishedExchanges, setUnfinishedExchanges] = useState([]);
+  const [reloadDataExchange, setReloadDataExchange] = useState(true);
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const [isOpenEditExchange, setIsOpenEditExchange] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function handleClickPickUp() {
-    setIsOpenPickUp(!isOpenPickUp);
+    setIsOpenPickUp(true);
   }
   function handleClickDropOff() {
-    setIsOpenDropOff(!isOpenDropOff);
+    setIsOpenDropOff(true);
   }
+
+  function onClosePickUp() {
+    setIsOpenPickUp(false);
+  }
+
+  function onCloseDropOff() {
+    setIsOpenDropOff(false);
+  }
+
+  function handleEditExchange(idx) {
+    setActiveIdx(idx);
+    setIsOpenEditExchange(true);
+  }
+
+  function onCloseEditForm() {
+    setIsOpenEditExchange(false);
+  }
+
+  function onUpdateExhange() {
+    setReloadDataExchange(true);
+  }
+
+  function handleDeclineExchange(id) {
+    const authHeader = authService.authHeader();
+    if (!authHeader) {
+      navigate("/login");
+    }
+
+    SwalReact.fire({
+      title: "Yakin membatalkan penukaran ini?",
+      icon: "warning",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Ya",
+      denyButtonText: "Tidak",
+    }).then((result) => {
+      if (result.value) {
+        axios({
+          method: "DELETE",
+          url: `${BASE_URL}/trash-transactions/${id}`,
+          headers: {
+            ...authHeader,
+          },
+          withCredentials: true,
+        })
+          .then(() => {
+            SwalReact.fire(
+              "Sukses!",
+              "Penukaran berhasil dibatalkan",
+              "success"
+            );
+          })
+          .catch((error) => {
+            if (error.response.status === 403) {
+              navigate("/dashboard");
+            } else if (error.response.status === 401) {
+              dispatch(logout());
+              navigate("/login");
+            } else {
+              SwalReact.fire({
+                icon: "error",
+                title: "Gagal membatalkan penukaran",
+                text: error.response.data.message,
+              });
+            }
+          })
+          .finally(() => {
+            setReloadDataExchange(true);
+          });
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (reloadDataExchange) {
+      const authHeader = authService.authHeader();
+      if (!authHeader) {
+        navigate("/login");
+      }
+
+      axios({
+        method: "GET",
+        url: `${BASE_URL}/trash-transactions/users`,
+        headers: {
+          ...authHeader,
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          setFinishedExchanges(response.data.data.finishedTransactions);
+          setUnfinishedExchanges(response.data.data.unfinishedTransactions);
+          setIsLoad(true);
+        })
+        .catch((error) => {
+          if (error.response.status === 403) {
+            navigate("/dashboard");
+          } else if (error.response.status === 401) {
+            navigate("/login");
+          } else {
+            navigate("/");
+          }
+        })
+        .finally(() => {
+          setReloadDataExchange(false);
+        });
+    }
+  }, [reloadDataExchange]);
+
+  const formatDate = (date) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(date).toLocaleDateString("id-ID", options);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -79,9 +209,16 @@ export function UserDashboard() {
     <div>
       {isLoad && (
         <>
+          {isOpenEditExchange && (
+            <FormEditPickUp
+              data={unfinishedExchanges[activeIdx]}
+              onClose={onCloseEditForm}
+              onUpdate={onUpdateExhange}
+            />
+          )}
           <DashboardNavbar fullname={user.fullname} email="-" />
-          {isOpenPickUp && <FormPickUp />}
-          {isOpenDropOff && <FormDropOff />}
+          {isOpenPickUp && <FormPickUp onClose={onClosePickUp} onUpdate={onUpdateExhange} />}
+          {isOpenDropOff && <FormDropOff onClose={onCloseDropOff} onUpdate={onUpdateExhange}/>}
           <section id="userstat">
             <div className="content">
               <TealHeader title="Analisa Penukaran Kamu" />
@@ -187,6 +324,90 @@ export function UserDashboard() {
                     </span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+          <section id="exchange-history">
+            <div className="border-b-2 border-b-teal-700 pb-10 mt-20 mb-8 w-full">
+              <TealHeader title="Riwayat Penukaran" />
+              <h4 className="text-teal-800 font-bold mb-5">
+                PENUKARAN BELUM TERSELESAIKAN
+              </h4>
+              <div className="overflow-x-scroll">
+                <table className="table-auto border w-full">
+                  <thead className="text-teal-800 bg-gray-100">
+                    <tr>
+                      <th className="text-start p-3">ID</th>
+                      <th className="text-start p-3">Jenis Penukaran</th>
+                      <th className="text-start p-3">Nama</th>
+                      <th className="text-start p-3">Jenis Sampah</th>
+                      <th className="text-start p-3">Berat (Kg)</th>
+                      <th className="text-start p-3">Lokasi</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {unfinishedExchanges.length > 0 &&
+                      unfinishedExchanges.map((exchange, idx) => (
+                        <tr key={exchange.id}>
+                          <td className="p-3">{exchange.id}</td>
+                          <td className="p-3">{exchange.transaction_type}</td>
+                          <td className="p-3">{exchange.fullname}</td>
+                          <td className="p-3">{exchange.trash_type}</td>
+                          <td className="p-3">{exchange.weight}</td>
+                          <td className="p-3">{exchange.location}</td>
+                          <td className="p-3">
+                            <div className="flex">
+                              <NavLink onClick={() => handleEditExchange(idx)}>
+                                <BiEdit className="me-3" size={20} />
+                              </NavLink>
+                              <NavLink
+                                onClick={() =>
+                                  handleDeclineExchange(exchange.id)
+                                }
+                              >
+                                <FaTimes size={20} color="red" />
+                              </NavLink>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-teal-800 font-bold mb-5">PENUKARAN SAMPAH</h4>
+              <div className="overflow-x-scroll">
+                <table className="table-auto border w-full  ">
+                  <thead className="text-teal-800 bg-gray-100">
+                    <tr>
+                      <th className="text-start p-3">ID</th>
+                      <th className="text-start p-3">Jenis Penukaran</th>
+                      <th className="text-start p-3">Nama</th>
+                      <th className="text-start p-3">Jenis Sampah</th>
+                      <th className="text-start p-3">Berat (Kg)</th>
+                      <th className="text-start p-3">Lokasi</th>
+                      <th className="text-start p-3">Disetujui Pada</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {finishedExchanges.length > 0 &&
+                      finishedExchanges.map((exchange) => (
+                        <tr key={exchange.id}>
+                          <td className="p-3">{exchange.id}</td>
+                          <td className="p-3">{exchange.transaction_type}</td>
+                          <td className="p-3">{exchange.fullname}</td>
+                          <td className="p-3">{exchange.trash_type}</td>
+                          <td className="p-3">{exchange.weight}</td>
+                          <td className="p-3">{exchange.location}</td>
+                          <td className="p-3">
+                            {formatDate(exchange.updated_at)}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </section>

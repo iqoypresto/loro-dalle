@@ -11,7 +11,9 @@ import { LiaHomeSolid } from "react-icons/lia";
 import { GiSwapBag } from "react-icons/gi";
 import Profile from "../assets/profile.png";
 import { logout } from "../actions/authAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { FormEditProfile } from "./Form";
+import { HashLink } from "react-router-hash-link";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +51,7 @@ export function Navbar() {
               <Link to="/">Beranda</Link>
             </li>
             <li>
-              <Link>Transkasi</Link>
+              <HashLink to="/dashboard#exchange-history">Transaksi</HashLink> 
             </li>
             <li>
               <Link to="/dashboard" className="last">
@@ -63,9 +65,11 @@ export function Navbar() {
   );
 }
 export function DashboardNavbar(props) {
+    const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const [isTransparent, setIsTransparent] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
+  const [isOpenEditUser, setIsOpenEditUser] = useState(false);
   const dispatch = useDispatch();
 
   const changeOpacity = () => {
@@ -88,9 +92,28 @@ export function DashboardNavbar(props) {
     dispatch(logout());
   }
 
+  function handleProfileSetting() {
+    setIsOpenEditUser(true);
+  }
+
+  function onCloseEditForm() {
+    setIsOpenEditUser(false);
+  }
+
+  function onUpdateEditForm() {
+    window.location.reload();
+  }
+
   window.addEventListener("scroll", changeOpacity);
   return (
-    <>
+    <div>
+        {isOpenEditUser && (
+          <FormEditProfile
+            data={user}
+            onClose={onCloseEditForm}
+            onUpdate={onUpdateEditForm}
+          />
+        )}
       <nav className={isTransparent ? "transparent" : ""}>
         <div className="nav-content">
           <Link to="/">
@@ -108,7 +131,7 @@ export function DashboardNavbar(props) {
               <Link to="/">Beranda</Link>
             </li>
             <li>
-              <Link>Transkasi</Link>
+              <HashLink to="/dashboard#exchange-history">Transaksi</HashLink>
             </li>
             <div className="profile-notif fleprops">
               <li className="relative">
@@ -128,7 +151,7 @@ export function DashboardNavbar(props) {
                     <h5 className="py-1">{props.fullname}</h5>
                   </div>
                   <div className="menu mt-3 gap-y-2 flex flex-col">
-                    <Link className="py-1">Profile Setting</Link>
+                    <Link onClick={handleProfileSetting} className="py-1">Profile Setting</Link>
                     <Link onClick={handleLogOut} to="/" className="py-1">
                       Log Out
                     </Link>
@@ -139,7 +162,7 @@ export function DashboardNavbar(props) {
           </ul>
         </div>
       </nav>
-    </>
+    </ div>
   );
 }
 
